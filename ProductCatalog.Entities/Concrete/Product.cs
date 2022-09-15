@@ -9,7 +9,6 @@ namespace ProductCatalog.Entities.Concrete
 {
     public class Product : BaseEntity, IEntity
     {
-        public virtual int ProductId { get; set; }
         public virtual int CategoryId { get; set; }
         public virtual int UserId { get; set; }
         public virtual string ProductName { get; set; }

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Entities.Concrete
 {
-    public class Category : BaseEntity, IEntity
+    public class UserOperationClaim : BaseEntity, IEntity
     {
-        public virtual string CategoryName { get; set; }
+        public virtual int UserId { get; set; }
+        public virtual int OperationClaimId { get; set; }
     }
 }

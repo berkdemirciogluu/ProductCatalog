@@ -8,7 +8,8 @@ namespace ProductCatalog.Entities.Concrete
 {
     public abstract class BaseEntity
     {
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public bool IsDeleted { get; set; } = false;
+        public virtual int Id { get; set; }
+        public virtual DateTime CreatedDate { get; set; } = DateTime.Now;
+        public virtual bool IsDeleted { get; set; } = false;
     }
 }
