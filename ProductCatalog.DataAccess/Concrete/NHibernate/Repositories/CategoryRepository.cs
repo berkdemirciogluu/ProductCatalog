@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductCatalog.Entities.Abstract
+namespace ProductCatalog.DataAccess.Concrete.NHibernate.Repositories
 {
-    public interface IDto
+    public class CategoryRepository
     {
     }
 }

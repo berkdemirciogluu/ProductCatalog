@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductCatalog.Entities.Abstract
+namespace ProductCatalog.Core.Entities
 {
     public interface IEntity
     {
