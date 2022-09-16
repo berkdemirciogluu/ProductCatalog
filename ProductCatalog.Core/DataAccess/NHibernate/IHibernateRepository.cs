@@ -1,9 +1,10 @@
 ﻿using ProductCatalog.Core.Entities;
+using ProductCatalog.Entities.Concrete;
 using System.Linq.Expressions;
 
 namespace ProductCatalog.Core.DataAccess.NHibernate
 {
-    public interface IHibernateRepository<TEntity> where TEntity : class,IEntity,new()
+    public interface IHibernateRepository<TEntity> where TEntity : BaseEntity
     {
         void BeginTransaction();
         void CommitTransaction();

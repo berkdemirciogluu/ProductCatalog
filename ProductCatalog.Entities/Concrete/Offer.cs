@@ -2,7 +2,7 @@
 
 namespace ProductCatalog.Entities.Concrete
 {
-    public class Offer : BaseEntity, IEntity
+    public class Offer : BaseEntity
     {
         public virtual int UserId { get; set; }
         public virtual int ProductId { get; set; }

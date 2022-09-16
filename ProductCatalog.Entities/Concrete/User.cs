@@ -2,7 +2,7 @@
 
 namespace ProductCatalog.Entities.Concrete
 {
-    public class User : BaseEntity, IEntity
+    public class User : BaseEntity
     {
         public virtual string UserName { get; set; }
         public virtual string FirstName { get; set; }

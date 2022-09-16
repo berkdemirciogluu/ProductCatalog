@@ -1,11 +1,10 @@
 ﻿using NHibernate;
-using NHibernate.Linq;
-using ProductCatalog.Core.Entities;
+using ProductCatalog.Entities.Concrete;
 using System.Linq.Expressions;
 
 namespace ProductCatalog.Core.DataAccess.NHibernate
 {
-    public class HibernateRepository<TEntity> : IHibernateRepository<TEntity> where TEntity : class, IEntity,new()
+    public class HibernateRepository<TEntity> : IHibernateRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly ISession _session; 
         private ITransaction _transaction; 
@@ -20,18 +19,18 @@ namespace ProductCatalog.Core.DataAccess.NHibernate
         public  List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
         {
             return filter == null
-                ?  _session.Query<TEntity>().ToList()
-                :  _session.Query<TEntity>().Where(filter).ToList();
+                ?  _session.Query<TEntity>().Where(e => e.IsDeleted == false).ToList()
+                :  _session.Query<TEntity>().Where(filter).ToList().Where(e => e.IsDeleted == false).ToList();
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            return _session.Query<TEntity>().Where(filter).SingleOrDefault();
+            return _session.Query<TEntity>().Where(e => e.IsDeleted == false).SingleOrDefault(filter);
         }
 
         public TEntity GetById(int id)
         {
-            return  _session.Get<TEntity>(id);
+            return  _session.Query<TEntity>().Where(e => e.IsDeleted == false).SingleOrDefault(e => e.Id == id);
         }
 
         public void Add(TEntity entity)
