@@ -1,12 +1,9 @@
-﻿using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ProductCatalog.Core.Entities;
 using System.Linq.Expressions;
 
 namespace ProductCatalog.Core.DataAccess.NHibernate
 {
-    public interface IHibernateRepository<TEntity> where TEntity : class
+    public interface IHibernateRepository<TEntity> where TEntity : class,IEntity,new()
     {
         void BeginTransaction();
         void Commit();

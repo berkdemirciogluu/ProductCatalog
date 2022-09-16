@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ProductCatalog.Core.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.Core.DataAccess.NHibernate
 {
-    public class HibernateRepository<Entity> : IHibernateRepository<Entity> where Entity : class
+    public class HibernateRepository<Entity> : IHibernateRepository<Entity> where Entity : class, IEntity,new()
     {
         public IQueryable<Entity> Entities => throw new NotImplementedException();
 
