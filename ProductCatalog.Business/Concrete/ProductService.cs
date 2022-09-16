@@ -1,6 +1,8 @@
 ﻿using ProductCatalog.Business.Abstract;
+using ProductCatalog.Core.DataAccess.NHibernate;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+using ProductCatalog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,12 @@ namespace ProductCatalog.Business.Concrete
         public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+        }
+
+        public IResult Add(Product product)
+        {
+            _productRepository.StartTransactionalOperation(Operation.Add, product);
+            return new SuccessResult();
         }
 
         public IResult GetAll()

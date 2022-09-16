@@ -3,6 +3,7 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
+using ProductCatalog.DataAccess.NHibernate.Mappings;
 
 namespace ProductCatalog.WebAPI.Entensions
 {
@@ -13,7 +14,7 @@ namespace ProductCatalog.WebAPI.Entensions
         public static IServiceCollection AddNHibernatePosgreSql(this IServiceCollection services, string connectionString)
         {
             var mapper = new ModelMapper();
-            mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
+            mapper.AddMappings(typeof(DefaultMapping).Assembly.ExportedTypes);
             HbmMapping domainMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
             var configuration = new Configuration();
@@ -32,11 +33,6 @@ namespace ProductCatalog.WebAPI.Entensions
 
             services.AddSingleton(sessionFactory);
             services.AddScoped(factory => sessionFactory.OpenSession());
-
-
-            // inject
-            //services.AddScoped<IMapperSession<Vehicle>, MapperSession<Vehicle>>();
-            //services.AddScoped<IMapperSession<Container>, MapperSession<Container>>();
 
             return services;
         }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 {
-    internal class ProductRepository : HibernateRepository<Product>, IProductRepository
+    public class ProductRepository : HibernateRepository<Product>, IProductRepository
     {
         private readonly ISession _session;
 

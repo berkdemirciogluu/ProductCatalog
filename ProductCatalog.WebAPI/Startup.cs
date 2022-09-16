@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ProductCatalog.Business.Abstract;
+using ProductCatalog.Business.Concrete;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.WebAPI.Entensions;
 using System;
 using System.Collections.Generic;
@@ -29,6 +33,9 @@ namespace ProductCatalog.WebAPI
         {
             var connStr = Configuration.GetConnectionString("PostgreSqlConnection");
             services.AddNHibernatePosgreSql(connStr);
+
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
