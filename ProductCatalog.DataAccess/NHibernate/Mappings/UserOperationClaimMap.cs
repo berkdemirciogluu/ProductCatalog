@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentNHibernate.Mapping;
+using ProductCatalog.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,24 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Mappings
 {
-    internal class UserOperationClaimMap
+    public class UserOperationClaimMap : ClassMap<UserOperationClaim>
     {
+        public UserOperationClaimMap()
+        {
+            Table("useroperationclaim");
+
+            Id(x => x.Id);
+
+            Map(x => x.UserId)
+                .Not.Nullable();
+
+            Map(x => x.OperationClaimId)
+                .Not.Nullable();
+            Map(b => b.IsDeleted)
+                .Not.Nullable();
+
+            Map(b => b.CreatedDate)
+                .Not.Nullable();
+        }
     }
 }
