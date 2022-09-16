@@ -11,7 +11,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
         {
             Table("operationclaim");
 
-            Id(x => x.Id);
+            Id(x => x.Id)
+                .GeneratedBy.Identity();
 
             Map(b => b.Name)
                 .Not.Nullable();

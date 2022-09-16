@@ -13,5 +13,11 @@
         public virtual double Price { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<User> Users { get; set; }
+
+        public Product()
+        {
+            Offers = new List<Offer>();
+            Users = new List<User>();
+        }
     }
 }

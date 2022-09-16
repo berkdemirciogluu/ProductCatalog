@@ -14,7 +14,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
         {
             Table("user");
 
-            Id(x => x.Id);
+            Id(x => x.Id)
+                .GeneratedBy.Identity();
 
             Map(b => b.FirstName)
                 .Not.Nullable();

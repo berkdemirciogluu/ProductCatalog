@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Abstract
 {
-    internal interface IProductRepository : IHibernateRepository<Product>
+    public interface IProductRepository : IHibernateRepository<Product>
     {
     }
 }

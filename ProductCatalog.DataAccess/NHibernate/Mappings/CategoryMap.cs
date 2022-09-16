@@ -9,7 +9,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
         {
             Table("category");
 
-            Id(x => x.Id);
+            Id(x => x.Id)
+                .GeneratedBy.Identity();
 
             Map(b => b.CategoryName)
                 .Not.Nullable();

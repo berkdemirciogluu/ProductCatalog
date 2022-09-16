@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Abstract
 {
-    internal interface IOfferRepository : IHibernateRepository<Offer>
+    public interface IOfferRepository : IHibernateRepository<Offer>
     {
     }
 }

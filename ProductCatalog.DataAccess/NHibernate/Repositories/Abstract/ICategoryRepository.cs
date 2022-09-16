@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Abstract
 {
-    internal interface ICategoryRepository : IHibernateRepository<Category>
+    public interface ICategoryRepository : IHibernateRepository<Category>
     {
     }
 }
