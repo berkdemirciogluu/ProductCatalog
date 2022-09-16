@@ -1,60 +1,107 @@
-﻿using ProductCatalog.Core.Entities;
+﻿using NHibernate;
+using NHibernate.Linq;
+using ProductCatalog.Core.Entities;
 using System.Linq.Expressions;
 
 namespace ProductCatalog.Core.DataAccess.NHibernate
 {
-    public class HibernateRepository<Entity> : IHibernateRepository<Entity> where Entity : class, IEntity,new()
+    public class HibernateRepository<TEntity> : IHibernateRepository<TEntity> where TEntity : class, IEntity,new()
     {
-        public IQueryable<Entity> Entities => throw new NotImplementedException();
+        private readonly ISession _session; 
+        private ITransaction _transaction; 
+
+        public HibernateRepository(ISession session)
+        {
+            _session = session;
+        }
+        public IQueryable<TEntity> Entities => _session.Query<TEntity>();
+
+
+        public  List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            return filter == null
+                ?  _session.Query<TEntity>().ToList()
+                :  _session.Query<TEntity>().Where(filter).ToList();
+        }
+
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            return _session.Query<TEntity>().Where(filter).SingleOrDefault();
+        }
+
+        public TEntity GetById(int id)
+        {
+            return  _session.Get<TEntity>(id);
+        }
+
+        public void Add(TEntity entity)
+        {
+             _session.Save(entity);
+        }
+
+        public void Update(TEntity entity)
+        {
+             _session.Update(entity);
+        }
+
+        public void Delete(TEntity entity)
+        {
+            _session.Delete(entity);              
+        }
 
         public void BeginTransaction()
         {
-            throw new NotImplementedException();
+            _transaction = _session.BeginTransaction();
+        }
+
+        public void CommitTransaction()
+        {
+             _transaction.Commit();
+        }
+
+        public void RollbackTransaction()
+        {
+            _transaction.Rollback();
         }
 
         public void CloseTransaction()
         {
-            throw new NotImplementedException();
+            if (_transaction != null)
+            {
+                _transaction.Dispose();
+                _transaction = null;
+            }
         }
-
-        public void Commit()
+        public virtual void StartTransactionalOperation(Operation operation, TEntity entity, TEntity? entityFromBody = null)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                BeginTransaction();
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+                switch (operation)
+                {
+                    case Operation.Add:
+                         Add(entity);
+                        break;
+                    case Operation.Update:
+                         Update(entity);
+                        break;
+                    case Operation.Delete:
+                         Delete(entity);
+                        break;
+                }
 
-        public Entity Get(Expression<Func<Entity, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Entity> GetAll(Expression<Func<Entity, bool>> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entity GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Rollback()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save(Entity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Entity entity)
-        {
-            throw new NotImplementedException();
+                 CommitTransaction();
+            }
+            catch
+            {
+                 RollbackTransaction();
+            }
+            finally
+            {
+                CloseTransaction();
+            }
         }
     }
+    public enum Operation {Empty, Add, Update, Delete }
 }
