@@ -4,11 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using ProductCatalog.Business.Abstract;
-using ProductCatalog.Business.Concrete;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
-using ProductCatalog.WebAPI.Entensions;
 
 namespace ProductCatalog.WebAPI
 {

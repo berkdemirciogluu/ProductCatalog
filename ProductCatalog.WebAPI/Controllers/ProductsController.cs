@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ProductCatalog.Business.Abstract;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.Concrete;
 
 namespace ProductCatalog.WebAPI.Controllers

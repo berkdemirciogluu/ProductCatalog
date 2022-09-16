@@ -2,23 +2,18 @@
 using ProductCatalog.Entities.Concrete;
 using System.Linq.Expressions;
 
-namespace ProductCatalog.Core.DataAccess.NHibernate
+namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
 {
     public interface IHibernateRepository<TEntity> where TEntity : BaseEntity
     {
-        //void BeginTransaction();
-        //void CommitTransaction();
-        //void RollbackTransaction();
-        //void CloseTransaction();
         void Add(TEntity entity);
         void Update(TEntity entity);
-        void Delete(TEntity entity);
+        void Delete(int id);
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
         TEntity Get(Expression<Func<TEntity, bool>> filter);
         TEntity GetById(int id);
 
         IQueryable<TEntity> Entities { get; }
 
-        //void StartTransactionalOperation(Operation operation, TEntity entity, TEntity? entityFromBody = null);
     }
 }

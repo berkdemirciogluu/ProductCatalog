@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
-using ProductCatalog.Business.Abstract;
-using ProductCatalog.Business.Concrete;
+using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.Services.Concrete;
 using ProductCatalog.Core.Utilities.Interceptors;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;

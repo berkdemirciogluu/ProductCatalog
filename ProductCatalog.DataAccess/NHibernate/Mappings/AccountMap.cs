@@ -24,9 +24,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.OfferId)
                 .Not.Nullable();
 
-            Map(b => b.IsDeleted)
-                .Not.Nullable();
-
             Map(b => b.CreatedDate)
                 .Not.Nullable();
 

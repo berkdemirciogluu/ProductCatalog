@@ -1,5 +1,5 @@
-﻿using ProductCatalog.Core.DataAccess.NHibernate;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+﻿using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Base;
 using ProductCatalog.Entities.Concrete;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete

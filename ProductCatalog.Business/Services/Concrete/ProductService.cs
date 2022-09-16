@@ -1,15 +1,9 @@
-﻿using ProductCatalog.Business.Abstract;
-using ProductCatalog.Core.DataAccess.NHibernate;
+﻿using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProductCatalog.Business.Concrete
+namespace ProductCatalog.Business.Services.Concrete
 {
     public class ProductService : IProductService
     {

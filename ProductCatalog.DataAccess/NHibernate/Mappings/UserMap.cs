@@ -41,9 +41,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.LastActivity)
                 .Not.Nullable();
 
-            Map(b => b.IsDeleted)
-                .Not.Nullable();
-
             Map(b => b.CreatedDate)
                 .Not.Nullable();
         }

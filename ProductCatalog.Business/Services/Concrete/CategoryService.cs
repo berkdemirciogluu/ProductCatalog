@@ -1,9 +1,9 @@
-﻿using ProductCatalog.Business.Abstract;
+﻿using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
 
-namespace ProductCatalog.Business.Concrete
+namespace ProductCatalog.Business.Services.Concrete
 {
     public class CategoryService : ICategoryService
     {
