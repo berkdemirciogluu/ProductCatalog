@@ -1,6 +1,4 @@
-﻿using ProductCatalog.Core.Entities;
-
-namespace ProductCatalog.Entities.Concrete
+﻿namespace ProductCatalog.Entities.Concrete
 {
     public class Category : BaseEntity
     {

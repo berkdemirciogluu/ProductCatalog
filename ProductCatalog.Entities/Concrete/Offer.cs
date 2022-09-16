@@ -1,6 +1,4 @@
-﻿using ProductCatalog.Core.Entities;
-
-namespace ProductCatalog.Entities.Concrete
+﻿namespace ProductCatalog.Entities.Concrete
 {
     public class Offer : BaseEntity
     {
@@ -9,7 +7,6 @@ namespace ProductCatalog.Entities.Concrete
         public virtual bool IsApproved { get; set; }
         public virtual bool IsSold { get; set; } = false;
         public virtual double OfferedPrice { get; set; }
-
 
     }
 }

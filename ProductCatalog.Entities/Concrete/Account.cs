@@ -1,15 +1,11 @@
-﻿using ProductCatalog.Core.Entities;
-
-namespace ProductCatalog.Entities.Concrete
+﻿namespace ProductCatalog.Entities.Concrete
 {
     public class Account : BaseEntity
     {
-        public virtual Product Product { get; set; }
+        public virtual int ProductId { get; set; }
 
-        public virtual Offer Offer { get; set; }
+        public virtual int OfferId { get; set; }
         public virtual int UserId { get; set; }
-
-
 
     }
 }
