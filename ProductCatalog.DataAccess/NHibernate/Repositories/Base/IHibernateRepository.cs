@@ -6,10 +6,10 @@ namespace ProductCatalog.Core.DataAccess.NHibernate
 {
     public interface IHibernateRepository<TEntity> where TEntity : BaseEntity
     {
-        void BeginTransaction();
-        void CommitTransaction();
-        void RollbackTransaction();
-        void CloseTransaction();
+        //void BeginTransaction();
+        //void CommitTransaction();
+        //void RollbackTransaction();
+        //void CloseTransaction();
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
@@ -19,6 +19,6 @@ namespace ProductCatalog.Core.DataAccess.NHibernate
 
         IQueryable<TEntity> Entities { get; }
 
-        void StartTransactionalOperation(Operation operation, TEntity entity, TEntity? entityFromBody = null);
+        //void StartTransactionalOperation(Operation operation, TEntity entity, TEntity? entityFromBody = null);
     }
 }

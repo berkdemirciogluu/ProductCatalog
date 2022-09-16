@@ -23,7 +23,7 @@ namespace ProductCatalog.WebAPI.Entensions
                 c.Dialect<PostgreSQLDialect>();
                 c.ConnectionString = connectionString;
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Update;
+                c.SchemaAction = SchemaAutoAction.Create;
                 c.LogFormattedSql = true;
                 c.LogSqlInConsole = true;
             });

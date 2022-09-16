@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.Abstract
 {
-    public interface IProductService
+    public interface ICategoryService
     {
-        IDataResult<List<Product>> GetAll();
-        IResult Add(Product product);
+        IDataResult<List<Category>> GetAll();
+        IResult Add(Category category);
     }
 }

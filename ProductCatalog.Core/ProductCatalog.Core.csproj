@@ -20,4 +20,8 @@
     <ProjectReference Include="..\ProductCatalog.Entities\ProductCatalog.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\NHibernate\" />
+  </ItemGroup>
+
 </Project>

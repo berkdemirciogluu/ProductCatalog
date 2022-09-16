@@ -1,21 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ProductCatalog.Business.Abstract;
 using ProductCatalog.Business.Concrete;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.WebAPI.Entensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.WebAPI
 {
@@ -31,11 +24,14 @@ namespace ProductCatalog.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connStr = Configuration.GetConnectionString("PostgreSqlConnection");
-            services.AddNHibernatePosgreSql(connStr);
+            //var connStr = Configuration.GetConnectionString("PostgreSqlConnection");
+            //services.AddNHibernatePosgreSql(connStr);
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
