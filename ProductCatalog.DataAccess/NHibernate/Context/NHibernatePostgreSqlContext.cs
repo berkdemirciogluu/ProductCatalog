@@ -10,13 +10,15 @@ namespace ProductCatalog.DataAccess.NHibernate.Context
     public class NHibernatePostgreSqlContext
     {
         private static ISessionFactory _session;
-        //public IConfiguration _configuration { get; }
-        //private string host;
+        public IConfiguration _configuration { get; }
+        private string host;
 
-        //public NHibernatePostgreSqlContext(IConfiguration configuration)
-        //{
-        //    _configuration = configuration;
-        //    host = _configuration.GetRequiredSection
+        public NHibernatePostgreSqlContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            string connectionString = _configuration.GetConnectionString("PostgreSqlConnection");
+
+        }
 
         private static ISessionFactory CreateSession()
         {

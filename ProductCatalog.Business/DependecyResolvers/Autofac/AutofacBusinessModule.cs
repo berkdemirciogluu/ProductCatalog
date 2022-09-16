@@ -17,6 +17,16 @@ namespace ProductCatalog.Business.DependecyResolvers.Autofac
             builder.RegisterType<ProductService>().As<IProductService>().SingleInstance();
             builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
 
+            //services.AddScoped<IProductService, ProductService>();
+            //services.AddScoped<IProductRepository, ProductRepository>();
+
+            builder.RegisterType<CategoryService>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
+
+
+            //services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

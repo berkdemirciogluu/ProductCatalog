@@ -24,15 +24,6 @@ namespace ProductCatalog.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var connStr = Configuration.GetConnectionString("PostgreSqlConnection");
-            //services.AddNHibernatePosgreSql(connStr);
-
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
