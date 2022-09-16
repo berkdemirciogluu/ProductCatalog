@@ -12,11 +12,12 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 {
     public class CategoryRepository : HibernateRepository<Category>, ICategoryRepository
     {
-        private readonly ISession _session;
+    //    private readonly ISession _session;
 
-        public CategoryRepository(ISession session) : base(session)
-        {
-            _session = session;
-        }
+    //    public CategoryRepository(ISession session) : base(session)
+    //    {
+    //        _session = session;
+    //    }
+    //
     }
 }

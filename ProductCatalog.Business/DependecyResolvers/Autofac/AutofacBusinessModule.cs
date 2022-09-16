@@ -24,8 +24,6 @@ namespace ProductCatalog.Business.DependecyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
-
-
         }
     }
 }

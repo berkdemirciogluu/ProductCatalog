@@ -12,11 +12,11 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 {
     public class AccountRepository : HibernateRepository<Account>, IAccountRepository
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
 
-        public AccountRepository(ISession session) : base(session)
-        {
-            _session = session;
-        }
+        //public AccountRepository(ISession session) : base(session)
+        //{
+        //    _session = session;
+        //}
     }
 }

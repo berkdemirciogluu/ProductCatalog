@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 {
-    public class OfferRepository : HibernateRepository<Offer>, IOfferRepository
-    {
-        private readonly ISession _session;
+    //public class OfferRepository : HibernateRepository<Offer>, IOfferRepository
+    //{
+    //    private readonly ISession _session;
 
-        public OfferRepository(ISession session) : base(session)
-        {
-            _session = session;
-        }
-    }
+    //    public OfferRepository(ISession session) : base(session)
+    //    {
+    //        _session = session;
+    //    }
+    //}
 }

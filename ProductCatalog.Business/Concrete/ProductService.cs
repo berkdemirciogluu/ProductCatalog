@@ -22,14 +22,13 @@ namespace ProductCatalog.Business.Concrete
 
         public IResult Add(Product product)
         {
-            _productRepository.StartTransactionalOperation(Operation.Add, product);
+            _productRepository.Add(product);
             return new SuccessResult();
         }
 
-        public IResult GetAll()
+        public IDataResult<List<Product>> GetAll()
         {
-            _productRepository.GetAll();
-            return new SuccessResult(); 
+            return new SuccessDataResult<List<Product>>(_productRepository.GetAll()); 
         }
     }
 }

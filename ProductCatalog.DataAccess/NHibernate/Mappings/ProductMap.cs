@@ -18,6 +18,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.UserId)
                 .Not.Nullable();
 
+            Map(b => b.OfferId)
+                .Not.Nullable();
+
             Map(b => b.ProductName)
                 .Not.Nullable();
 
@@ -39,9 +42,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.Price)
                 .Not.Nullable();
 
-            HasMany(x => x.Offers);
+            //HasMany(x => x.Offers);
 
-            HasMany(x => x.Users);
+            //HasMany(x => x.Users);
 
             Map(b => b.IsDeleted)
                 .Not.Nullable();
