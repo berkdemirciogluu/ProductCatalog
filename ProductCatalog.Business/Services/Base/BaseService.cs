@@ -1,34 +1,58 @@
-﻿using System;
+﻿using AutoMapper;
+using ProductCatalog.Core.Utilities.Results;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Base;
+using ProductCatalog.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductCatalog.Business.Constants;
 
 namespace ProductCatalog.Business.Services.Base
 {
-    public class BaseService<TDto, TEntity> : IBaseService<TDto, TEntity>
+    public class BaseService<TDto, TEntity> : IBaseService<TDto, TEntity> where TEntity : BaseEntity
     {
-        public Core.Utilities.Results.IDataResult<TDto> Add(TDto dto)
+        protected readonly IHibernateRepository<TEntity> _hibernateRepository;
+        protected readonly IMapper _mapper;
+
+        public BaseService(IMapper mapper, IHibernateRepository<TEntity> hibernateRepository)
+        {
+            _mapper = mapper;
+            _hibernateRepository = hibernateRepository;
+        }
+
+        public IDataResult<TDto> Add(TDto dto)
+        {
+            try
+            {
+                var tempEntity = _mapper.Map<TDto,TEntity>(dto);
+                _hibernateRepository.Add(tempEntity);
+                return new SuccessDataResult<TDto>(_mapper.Map<TEntity, TDto>(tempEntity),Messages.SuccessfullyAdded);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public IDataResult<TDto> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Core.Utilities.Results.IDataResult<TDto> Delete(int id)
+        public IDataResult<List<TDto>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Core.Utilities.Results.IDataResult<List<TDto>> GetAll()
+        public IDataResult<TDto> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Core.Utilities.Results.IDataResult<TDto> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Core.Utilities.Results.IDataResult<TDto> Update(int id, TDto dto)
+        public IDataResult<TDto> Update(int id, TDto dto)
         {
             throw new NotImplementedException();
         }
