@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <Folder Include="Abstract\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Email\" />
+    <Folder Include="DTOs\User\" />
+    <Folder Include="DTOs\Offer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
 </Project>

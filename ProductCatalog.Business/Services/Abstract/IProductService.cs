@@ -12,5 +12,7 @@ namespace ProductCatalog.Business.Services.Abstract
     {
         IDataResult<List<Product>> GetAll();
         IResult Add(Product product);
+        IResult Delete(int id);
+
     }
 }

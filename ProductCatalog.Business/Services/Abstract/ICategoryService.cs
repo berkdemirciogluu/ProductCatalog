@@ -1,5 +1,6 @@
 ﻿using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.Entities.Concrete;
+using ProductCatalog.Entities.DTOs.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace ProductCatalog.Business.Services.Abstract
     public interface ICategoryService
     {
         IDataResult<List<Category>> GetAll();
-        IResult Add(Category category);
+        IResult Add(Category entity);
+        IResult Delete(int id);
+        IResult Update(Category entity,int id);
     }
 }

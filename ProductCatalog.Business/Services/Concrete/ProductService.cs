@@ -1,4 +1,5 @@
-﻿using ProductCatalog.Business.Services.Abstract;
+﻿using ProductCatalog.Business.Constants;
+using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
@@ -18,6 +19,26 @@ namespace ProductCatalog.Business.Services.Concrete
         {
             _productRepository.Add(product);
             return new SuccessResult();
+        }
+
+        public IResult Delete(int id)
+        {
+            var productToDelete = _productRepository.GetById(id);
+            if (productToDelete == null)
+            {
+                return new ErrorResult(Messages.ProductInvalid);
+            }
+
+            try
+            {
+                _productRepository.Delete(productToDelete.Id);
+                return new SuccessResult(Messages.ProductDeleted);
+            }
+            catch (Exception ex)
+            {
+
+                return new ErrorResult(Messages.ProductNotDeleted);
+            }
         }
 
         public IDataResult<List<Product>> GetAll()

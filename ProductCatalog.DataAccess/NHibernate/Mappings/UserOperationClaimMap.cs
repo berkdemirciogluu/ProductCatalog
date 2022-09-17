@@ -17,8 +17,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Id(x => x.Id)
                 .GeneratedBy.Identity();
 
-            Map(x => x.UserId)
-                .Not.Nullable();
+            References(x => x.User);
 
             Map(x => x.OperationClaimId)
                 .Not.Nullable();

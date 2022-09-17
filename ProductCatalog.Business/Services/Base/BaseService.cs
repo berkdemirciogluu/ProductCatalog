@@ -24,17 +24,7 @@ namespace ProductCatalog.Business.Services.Base
 
         public IDataResult<TDto> Add(TDto dto)
         {
-            try
-            {
-                var tempEntity = _mapper.Map<TDto,TEntity>(dto);
-                _hibernateRepository.Add(tempEntity);
-                return new SuccessDataResult<TDto>(_mapper.Map<TEntity, TDto>(tempEntity),Messages.SuccessfullyAdded);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public IDataResult<TDto> Delete(int id)
