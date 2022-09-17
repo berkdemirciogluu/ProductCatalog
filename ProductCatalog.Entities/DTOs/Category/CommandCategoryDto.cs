@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Entities.DTOs.Category
 {
-    public class UpdateCategoryDto
+    public class CommandCategoryDto
     {
         public virtual string CategoryName { get; set; }
     }

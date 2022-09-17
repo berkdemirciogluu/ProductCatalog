@@ -14,8 +14,7 @@ namespace ProductCatalog.Entities.MappingProfiles
     {
         public MappingProfile()
         {
-            CreateMap<AddCategoryDto, Category>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+            CreateMap<CommandCategoryDto, Category>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
 
             CreateMap<AddProductDto, Product>().ReverseMap();

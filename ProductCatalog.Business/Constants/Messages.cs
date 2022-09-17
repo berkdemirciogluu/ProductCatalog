@@ -14,5 +14,7 @@
         public static string ProductInvalid { get; internal set; }
         public static string ProductDeleted { get; internal set; }
         public static string ProductNotDeleted { get; internal set; }
+        public static string CategoryNameWarning { get; internal set; }
+        public static string CategoryNameAlreadyExists { get; internal set; }
     }
 }

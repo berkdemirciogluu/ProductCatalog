@@ -12,8 +12,8 @@ namespace ProductCatalog.Business.Services.Abstract
     public interface ICategoryService
     {
         IDataResult<List<CategoryDto>> GetAll();
-        IResult Add(AddCategoryDto entity);
+        IResult Add(CommandCategoryDto entity);
         IResult Delete(int id);
-        IResult Update(UpdateCategoryDto entity,int id);
+        IResult Update(CommandCategoryDto entity,int id);
     }
 }

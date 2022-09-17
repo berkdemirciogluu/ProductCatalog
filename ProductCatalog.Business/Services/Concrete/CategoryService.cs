@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.ValidationRules.FluentValidation.CategoryValidation;
+using ProductCatalog.Core.Aspects.Autofac.Validation;
+using ProductCatalog.Core.CrossCuttingConcerns.Validation;
+using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
@@ -18,19 +22,20 @@ namespace ProductCatalog.Business.Services.Concrete
             _mapper = mapper;
         }
 
-        public IResult Add(AddCategoryDto entity)
+        [ValidationAspect(typeof(CommandCategoryDtoValidator))]
+        public IResult Add(CommandCategoryDto category)
         {
-            try
-            {
-                var category = _mapper.Map<Category>(entity);
-                _categoryRepository.Add(category);
-                return new SuccessResult(Messages.CategoryAdded);
-            }
-            catch (Exception)
-            {
+            IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName));
 
-                return new ErrorResult(Messages.CategoryNotAdded);
+            if (result != null)
+            {
+                return result;
             }
+
+            var categoryToAdded = _mapper.Map<Category>(category);
+            _categoryRepository.Add(categoryToAdded);
+
+            return new SuccessResult(Messages.CategoryAdded);
         }
 
         public IResult Delete(int id)
@@ -46,7 +51,7 @@ namespace ProductCatalog.Business.Services.Concrete
                 _categoryRepository.Delete(categoryToDelete.Id);
                 return new SuccessResult(Messages.CategoryDeleted);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return new ErrorResult(Messages.CategoryNotDeleted);
@@ -58,27 +63,45 @@ namespace ProductCatalog.Business.Services.Concrete
             var categories = _categoryRepository.GetAll();
             var result = _mapper.Map<List<CategoryDto>>(categories);
 
-            return new SuccessDataResult<List<CategoryDto>>(result,Messages.CategoryListed);
+            return new SuccessDataResult<List<CategoryDto>>(result, Messages.CategoryListed);
         }
 
-        public IResult Update(UpdateCategoryDto entity, int id)
+        [ValidationAspect(typeof(CommandCategoryDtoValidator))]
+        public IResult Update(CommandCategoryDto category, int id)
         {
+            IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName),
+                                               CheckIfCategoryInvalid(id));
+            if (result != null)
+            {
+                return result;
+            }
+
             var categoryToUpdate = _categoryRepository.GetById(id);
+            categoryToUpdate.CategoryName = category.CategoryName != default ? category.CategoryName : categoryToUpdate.CategoryName;
+            _categoryRepository.Update(categoryToUpdate);
+            return new SuccessResult(Messages.CategoryUpdated);
 
-            if(categoryToUpdate == null)
-                return new ErrorResult(Messages.CategoryInvalid);
-
-            try
-            {
-                categoryToUpdate.CategoryName = entity.CategoryName != default ? entity.CategoryName : categoryToUpdate.CategoryName;
-                _categoryRepository.Update(categoryToUpdate);
-                return new SuccessResult(Messages.CategoryUpdated);
-            }
-            catch (Exception)
-            {
-
-                return new ErrorResult(Messages.CategoryNotUpdated);
-            }
         }
+
+        public IResult CheckIfCategoryNameExist(string categoryName)
+        {
+            var result = _categoryRepository.GetAll(p => p.CategoryName == categoryName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CategoryNameAlreadyExists);
+            }
+            return new SuccessResult();
+        }
+
+        public IResult CheckIfCategoryInvalid(int id)
+        {
+            var result = _categoryRepository.GetById(id);
+            if (result == null)
+            {
+                return new ErrorResult(Messages.CategoryInvalid);
+            }
+            return new SuccessResult();
+        }
+
     }
 }

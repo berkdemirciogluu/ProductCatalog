@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValidationRules\FluentValidation\" />
+    <Folder Include="ValidationRules\CustomValidation\CategoryValidation\" />
   </ItemGroup>
 
 </Project>

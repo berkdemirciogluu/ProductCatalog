@@ -13,8 +13,7 @@ namespace ProductCatalog.Entities.MappingProfiles.AutoMapper
     {
         public CategoryMappingProfile()
         {
-            CreateMap<AddCategoryDto, Category>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+            CreateMap<CommandCategoryDto, Category>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
 
         }

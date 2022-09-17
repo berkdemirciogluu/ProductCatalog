@@ -8,6 +8,7 @@ namespace ProductCatalog.Entities.DTOs.Category
 {
     public class CategoryDto
     {
+        public virtual int Id { get; set; }
         public virtual string CategoryName { get; set; }
     }
 }
