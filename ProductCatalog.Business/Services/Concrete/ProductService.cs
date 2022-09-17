@@ -1,22 +1,27 @@
-﻿using ProductCatalog.Business.Constants;
+﻿using AutoMapper;
+using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
+using ProductCatalog.Entities.DTOs.Product;
 
 namespace ProductCatalog.Business.Services.Concrete
 {
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
-        public IResult Add(Product product)
+        public IResult Add(AddProductDto entity)
         {
+            var product = _mapper.Map<Product>(entity);
             _productRepository.Add(product);
             return new SuccessResult();
         }
@@ -41,9 +46,11 @@ namespace ProductCatalog.Business.Services.Concrete
             }
         }
 
-        public IDataResult<List<Product>> GetAll()
+        public IDataResult<List<GetProductDto>> GetAll()
         {
-            return new SuccessDataResult<List<Product>>(_productRepository.GetAll()); 
+            var products = _productRepository.GetAll();
+            var result = _mapper.Map<List<GetProductDto>>(products);
+            return new SuccessDataResult<List<GetProductDto>>(result); 
         }
     }
 }

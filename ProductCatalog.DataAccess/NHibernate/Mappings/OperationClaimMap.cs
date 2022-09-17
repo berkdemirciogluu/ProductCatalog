@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
 using NHibernate;
 using NHibernate.Mapping.ByCode;
+using ProductCatalog.Core.Entities.Concrete;
 using ProductCatalog.Entities.Concrete;
 
 namespace ProductCatalog.DataAccess.NHibernate.Mappings
@@ -9,10 +10,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public OperationClaimMap()
         {
-            Table("operationclaim");
+            Table("tbloperationclaim");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             Map(b => b.Name)
                 .Not.Nullable();

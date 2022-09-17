@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using ProductCatalog.Core.Entities.Concrete;
 using ProductCatalog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public UserMap()
         {
-            Table("user");
+            Table("tbluser");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             Map(b => b.FirstName)
                 .Not.Nullable();
@@ -29,12 +29,12 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.Email)
                 .Not.Nullable();
 
-            Map(b => b.PasswordHash).Not.Nullable();
+            Map(b => b.PasswordHash);
 
-            Map(b => b.PasswordSalt).Not.Nullable();
+            Map(b => b.PasswordSalt);
 
-            Map(b => b.Status)
-                .Not.Nullable();
+            Map(b => b.Status);
+
         }
     }
 }

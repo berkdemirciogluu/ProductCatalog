@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using ProductCatalog.Core.Entities.Concrete;
 using ProductCatalog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,11 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public UserOperationClaimMap()
         {
-            Table("useroperationclaim");
+            Table("tbluseroperationclaim");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
-            References(x => x.User);
+            Map(x => x.UserId).Not.Nullable();
 
             Map(x => x.OperationClaimId)
                 .Not.Nullable();

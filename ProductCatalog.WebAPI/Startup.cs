@@ -1,9 +1,15 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.Services.Concrete;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
+using ProductCatalog.Entities.MappingProfiles;
 using System.Reflection;
 
 namespace ProductCatalog.WebAPI
@@ -21,7 +27,14 @@ namespace ProductCatalog.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            services.AddSingleton(mapperConfig.CreateMapper());
 
             services.AddSwaggerGen(c =>
             {

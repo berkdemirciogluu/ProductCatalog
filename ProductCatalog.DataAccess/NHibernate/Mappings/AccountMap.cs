@@ -10,10 +10,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public AccountMap()
         {
-            Table("account");
+            Table("tblaccount");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             References(b => b.User);
 
@@ -21,7 +20,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             References(b => b.Offer);
 
-            Map(b => b.UserId);
+            //Map(b => b.UserId);
         }
     }
 }

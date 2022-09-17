@@ -1,17 +1,12 @@
 ﻿using ProductCatalog.Core.Utilities.Results;
-using ProductCatalog.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProductCatalog.Entities.DTOs.Product;
 
 namespace ProductCatalog.Business.Services.Abstract
 {
     public interface IProductService
     {
-        IDataResult<List<Product>> GetAll();
-        IResult Add(Product product);
+        IDataResult<List<GetProductDto>> GetAll();
+        IResult Add(AddProductDto entity);
         IResult Delete(int id);
 
     }

@@ -9,10 +9,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public OfferMap()
         {
-            Table("offer");
+            Table("tbloffer");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             References(b => b.User);
 
@@ -27,8 +26,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.OfferedPrice)
                 .Not.Nullable();
 
-            Map(b => b.UserId);
-            Map(b => b.ProductId);
+            //Map(b => b.UserId);
+            //Map(b => b.ProductId);
         }
     }
 }

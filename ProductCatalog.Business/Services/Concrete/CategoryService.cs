@@ -18,11 +18,12 @@ namespace ProductCatalog.Business.Services.Concrete
             _mapper = mapper;
         }
 
-        public IResult Add(Category entity)
+        public IResult Add(AddCategoryDto entity)
         {
             try
             {
-                _categoryRepository.Add(entity);
+                var category = _mapper.Map<Category>(entity);
+                _categoryRepository.Add(category);
                 return new SuccessResult(Messages.CategoryAdded);
             }
             catch (Exception)
@@ -52,12 +53,15 @@ namespace ProductCatalog.Business.Services.Concrete
             }
         }
 
-        public IDataResult<List<Category>> GetAll()
+        public IDataResult<List<CategoryDto>> GetAll()
         {
-            return new SuccessDataResult<List<Category>>(_categoryRepository.GetAll(),Messages.CategoryListed);
+            var categories = _categoryRepository.GetAll();
+            var result = _mapper.Map<List<CategoryDto>>(categories);
+
+            return new SuccessDataResult<List<CategoryDto>>(result,Messages.CategoryListed);
         }
 
-        public IResult Update(Category entity, int id)
+        public IResult Update(UpdateCategoryDto entity, int id)
         {
             var categoryToUpdate = _categoryRepository.GetById(id);
 

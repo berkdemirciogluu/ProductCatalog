@@ -8,7 +8,6 @@ namespace ProductCatalog.Entities.DTOs.Category
 {
     public class UpdateCategoryDto
     {
-        public virtual int Id { get; set; }
         public virtual string CategoryName { get; set; }
     }
 }

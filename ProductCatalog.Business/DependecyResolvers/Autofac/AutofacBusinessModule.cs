@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
+using AutoMapper;
 using Castle.DynamicProxy;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.Services.Concrete;
 using ProductCatalog.Core.Utilities.Interceptors;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Base;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
-using ProductCatalog.Entities.Concrete;
+using ProductCatalog.Entities.MappingProfiles;
 
 namespace ProductCatalog.Business.DependecyResolvers.Autofac
 {

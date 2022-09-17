@@ -7,10 +7,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public CategoryMap()
         {
-            Table("category");
+            Table("tblcategory");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             Map(b => b.CategoryName)
                 .Not.Nullable();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.Concrete;
+using ProductCatalog.Entities.DTOs.Product;
 
 namespace ProductCatalog.WebAPI.Controllers
 {
@@ -27,7 +28,7 @@ namespace ProductCatalog.WebAPI.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add([FromBody] Product product) //This method of adding the instance with the parameters taken from body to the list.
+        public IActionResult Add([FromBody] AddProductDto product) //This method of adding the instance with the parameters taken from body to the list.
         {
             var result = _productService.Add(product);
             if (result.Success)

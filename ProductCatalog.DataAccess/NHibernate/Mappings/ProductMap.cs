@@ -10,10 +10,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
     {
         public ProductMap()
         {
-            Table("product");
+            Table("tblproduct");
 
-            Id(x => x.Id)
-                .GeneratedBy.Identity();
+            Id(x => x.Id);
 
             References(b => b.User);
 
@@ -33,7 +32,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.IsSold)
                 .Not.Nullable();
 
-            Map(b => b.CategoryId);
+            //Map(b => b.CategoryId);
 
             Map(b => b.Color)
                 .Not.Nullable();

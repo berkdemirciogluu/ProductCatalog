@@ -28,7 +28,7 @@ namespace ProductCatalog.WebAPI.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add([FromBody] Category entity) //This method of adding the instance with the parameters taken from body to the list.
+        public IActionResult Add([FromBody] AddCategoryDto entity) //This method of adding the instance with the parameters taken from body to the list.
         {
             var result = _categoryService.Add(entity);
             if (result.Success)
@@ -39,7 +39,7 @@ namespace ProductCatalog.WebAPI.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public IActionResult Update([FromBody] Category category, int id) //This method of updating the instance according to the parameters taken from body to the list.
+        public IActionResult Update([FromBody] UpdateCategoryDto category, int id) //This method of updating the instance according to the parameters taken from body to the list.
         {
             var result = (_categoryService.Update(category, id));
             if (result.Success)
