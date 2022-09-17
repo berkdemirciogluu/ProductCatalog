@@ -13,7 +13,7 @@ namespace ProductCatalog.Business.ValidationRules.FluentValidation.CategoryValid
     {
         public CommandCategoryDtoValidator()
         {
-            RuleFor(c => c.CategoryName).NotNull().WithMessage(Messages.CategoryNameWarning);
+            RuleFor(c => c.CategoryName).NotNull();
         }        
     }
 }

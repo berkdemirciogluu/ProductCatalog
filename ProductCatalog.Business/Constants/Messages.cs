@@ -11,10 +11,9 @@
         public static string CategoryUpdated = "Category is updated";
         public static string CategoryNotUpdated = "Category could not be updated";
 
-        public static string ProductInvalid { get; internal set; }
-        public static string ProductDeleted { get; internal set; }
-        public static string ProductNotDeleted { get; internal set; }
-        public static string CategoryNameWarning { get; internal set; }
-        public static string CategoryNameAlreadyExists { get; internal set; }
+        public static string ProductInvalid = "Product is invalid";
+        public static string ProductDeleted = "Product is deleted";
+        public static string ProductNotDeleted = "Product could not be deleted";
+        public static string CategoryNameAlreadyExists = "Category name already exist";
     }
 }

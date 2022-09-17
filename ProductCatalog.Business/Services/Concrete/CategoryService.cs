@@ -29,7 +29,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
             if (result != null)
             {
-                return result;
+                return new ErrorResult(result.Message);
             }
 
             var categoryToAdded = _mapper.Map<Category>(category);
@@ -73,7 +73,7 @@ namespace ProductCatalog.Business.Services.Concrete
                                                CheckIfCategoryInvalid(id));
             if (result != null)
             {
-                return result;
+                return new ErrorResult(result.Message);
             }
 
             var categoryToUpdate = _categoryRepository.GetById(id);
