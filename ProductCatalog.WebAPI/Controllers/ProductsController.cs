@@ -36,5 +36,16 @@ namespace ProductCatalog.WebAPI.Controllers
             }
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
+
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var result = _productService.Delete(id); //This method of deleting the instance according to id.
+            if (result.Success)
+            {
+                return Ok(result);//If the process was successful, it will return 200 status code with a relevant message.
+            }
+            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+        }
     }
 }

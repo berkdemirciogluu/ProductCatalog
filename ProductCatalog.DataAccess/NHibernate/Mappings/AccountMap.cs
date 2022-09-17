@@ -21,9 +21,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             References(b => b.Offer);
 
-            Map(b => b.CreatedDate)
-                .Not.Nullable();
-
+            Map(b => b.UserId);
         }
     }
 }

@@ -29,19 +29,11 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.Email)
                 .Not.Nullable();
 
-            Map(b => b.PasswordHash)
-                .Not.Nullable();
+            Map(b => b.PasswordHash).Not.Nullable();
 
-            Map(b => b.PasswordSalt)
-                .Not.Nullable();
+            Map(b => b.PasswordSalt).Not.Nullable();
 
             Map(b => b.Status)
-                .Not.Nullable();
-
-            Map(b => b.LastActivity)
-                .Not.Nullable();
-
-            Map(b => b.CreatedDate)
                 .Not.Nullable();
         }
     }

@@ -14,9 +14,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Map(b => b.CategoryName)
                 .Not.Nullable();
-
-            Map(b => b.CreatedDate)
-                .Not.Nullable();
         }
     }
 }

@@ -9,7 +9,6 @@
         public virtual byte[] PasswordSalt { get; set; }
         public virtual byte[] PasswordHash { get; set; }
         public virtual bool Status { get; set; }
-        public virtual DateTime LastActivity { get; set; }
 
     }
 }

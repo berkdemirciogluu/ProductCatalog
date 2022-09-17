@@ -66,7 +66,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
             try
             {
-                categoryToUpdate.CategoryName = entity.CategoryName != default ? entity.CategoryName : updatedCategory.CategoryName;
+                categoryToUpdate.CategoryName = entity.CategoryName != default ? entity.CategoryName : categoryToUpdate.CategoryName;
                 _categoryRepository.Update(categoryToUpdate);
                 return new SuccessResult(Messages.CategoryUpdated);
             }

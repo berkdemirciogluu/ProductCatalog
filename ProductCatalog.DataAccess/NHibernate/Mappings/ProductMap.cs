@@ -17,7 +17,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             References(b => b.User);
 
-            References(b => b.Offer);
+            References(b => b.Category);
+
+            HasManyToMany(b => b.Offers).Inverse().Cascade.All();
 
             Map(b => b.ProductName)
                 .Not.Nullable();
@@ -31,6 +33,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.IsSold)
                 .Not.Nullable();
 
+            Map(b => b.CategoryId);
+
             Map(b => b.Color)
                 .Not.Nullable();
 
@@ -38,9 +42,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
                 .Not.Nullable();
 
             Map(b => b.Price)
-                .Not.Nullable();
-
-            Map(b => b.CreatedDate)
                 .Not.Nullable();
 
         }
