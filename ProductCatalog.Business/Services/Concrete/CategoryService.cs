@@ -79,7 +79,6 @@ namespace ProductCatalog.Business.Services.Concrete
             categoryToUpdate.CategoryName = category.CategoryName != default ? category.CategoryName : categoryToUpdate.CategoryName;
             _categoryRepository.Update(categoryToUpdate);
             return new SuccessResult(Messages.CategoryUpdated);
-
         }
 
         public IResult CheckIfCategoryNameExist(string categoryName)

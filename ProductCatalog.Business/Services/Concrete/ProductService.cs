@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.Entities.Concrete;
@@ -19,43 +21,86 @@ namespace ProductCatalog.Business.Services.Concrete
             _mapper = mapper;
         }
 
-        public IResult Add(AddProductDto entity)
+        [SecuredOperation("admin")]
+        public IResult Add(AddProductDto entity, string userId)
         {
             var product = _mapper.Map<Product>(entity);
+
+            product.UserId = Convert.ToInt32(userId);
+            product.IsOfferable = true;
+            product.IsSold = false;
             _productRepository.Add(product);
-            return new SuccessResult();
+            return new SuccessResult(Messages.ProductAdded);
         }
 
         public IResult Delete(int id)
         {
+            var result = BusinessRules.Run(CheckIfProductInvalid(id));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
             var productToDelete = _productRepository.GetById(id);
-            if (productToDelete == null)
-            {
-                return new ErrorResult(Messages.ProductInvalid);
-            }
-
-            try
-            {
-                _productRepository.Delete(productToDelete.Id);
-                return new SuccessResult(Messages.ProductDeleted);
-            }
-            catch (Exception ex)
-            {
-
-                return new ErrorResult(Messages.ProductNotDeleted);
-            }
+            _productRepository.Delete(productToDelete.Id);
+            return new SuccessResult(Messages.ProductDeleted);
         }
 
         public IDataResult<List<GetProductDto>> GetAll()
         {
             var products = _productRepository.GetAll();
             var result = _mapper.Map<List<GetProductDto>>(products);
-            return new SuccessDataResult<List<GetProductDto>>(result); 
+            return new SuccessDataResult<List<GetProductDto>>(result);
         }
+
+        public IResult Update(UpdateProductDto product, int id, string userId)
+        {
+
+            var productToUpdate = _productRepository.GetById(id);
+            IResult result = BusinessRules.Run(CheckIfProductInvalid(id), CheckProductOwner(productToUpdate, userId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            productToUpdate.Brand = product.Brand != default ? product.Brand : productToUpdate.Brand;
+            productToUpdate.Description = product.Description != default ? product.Description : productToUpdate.Description;
+            productToUpdate.Price = product.Price != default ? product.Price : productToUpdate.Price;
+            productToUpdate.Color = product.Color != default ? product.Color : productToUpdate.Color;
+            productToUpdate.ProductName = product.ProductName != default ? product.ProductName : productToUpdate.ProductName;
+
+            _productRepository.Update(productToUpdate);
+            return new SuccessResult(Messages.ProductUpdated);
+        }
+
+
 
         //public IDataResult<List<ProductOfferDto>> GetProductsOffer()
         //{
         //    return new SuccessDataResult<List<ProductOfferDto>>(_productRepository.GetProductsOffer());
         //}
+
+
+        public IResult CheckIfProductInvalid(int id)
+        {
+            var result = _productRepository.GetById(id);
+            if (result == null)
+            {
+                return new ErrorResult(Messages.ProductInvalid);
+            }
+            return new SuccessResult();
+        }
+
+        public IResult CheckProductOwner(Product product, string userId)
+        {
+            if(product.UserId != Convert.ToInt32(userId))
+            {
+                return new ErrorResult(Messages.NotProductOwner);
+            }
+            return new SuccessResult();
+        }
     }
 }
+//eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjgiLCJlbWFpbCI6ImJlc3RlQGJlc3RlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJCZXN0ZSBCaWxlbiIsIm5iZiI6MTY2MzUzODczMiwiZXhwIjoxNjYzNTM5OTMyLCJpc3MiOiJiZXJrQGJlcmsuY29tIiwiYXVkIjoiYmVya0BiZXJrLmNvbSJ9.lnHq3VTwY66LHLgnNacJdpLR5NiepOaxno3lhlieGk8TqUH49tltN9ojo8JE4ESXpgqtkUAKgLr-1MJZ9lSY3g

@@ -21,5 +21,11 @@ namespace ProductCatalog.Business.Constants
         public static string SuccesfulLogin = "Wrong Username or Password.";
         public static string UserRegistered = "Wrong Username or Password.";
         public static string TokenGenerated = "Token Generated";
+
+        public static string ProductAdded = "Product is Added";
+
+        public static string ProductUpdated = "Product is updated";
+
+        public static string NotProductOwner = "You do not own this product.";
     }
 }

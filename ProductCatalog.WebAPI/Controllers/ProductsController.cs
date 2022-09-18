@@ -2,6 +2,8 @@
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.Concrete;
 using ProductCatalog.Entities.DTOs.Product;
+using System.Linq;
+using System.Security.Claims;
 
 namespace ProductCatalog.WebAPI.Controllers
 {
@@ -30,7 +32,8 @@ namespace ProductCatalog.WebAPI.Controllers
         [HttpPost("Add")]
         public IActionResult Add([FromBody] AddProductDto product) //This method of adding the instance with the parameters taken from body to the list.
         {
-            var result = _productService.Add(product);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _productService.Add(product, userId);
             if (result.Success)
             {
                 return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
@@ -49,10 +52,17 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
 
-        //[HttpGet("productsforoffer")]
-        //public IActionResult GetProductsOffer()
-        //{
-        //    return Ok(_productService.GetProductsOffer());
-        //}
+        [HttpPut("Update/{id}")]
+        public IActionResult Update([FromBody] UpdateProductDto product, int id) //This method of updating the instance according to the parameters taken from body to the list.
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _productService.Update(product, id, userId);
+            if (result.Success)
+            {
+                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+            }
+            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+
+        }
     }
 }
