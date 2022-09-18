@@ -9,6 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.Services.Concrete;
+using ProductCatalog.Core.DependencyResolvers;
+using ProductCatalog.Core.Extensions;
+using ProductCatalog.Core.Utilities.IoC;
 using ProductCatalog.Core.Utilities.Security.Encryption;
 using ProductCatalog.Core.Utilities.Security.JWT;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
@@ -48,6 +51,10 @@ namespace ProductCatalog.WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+
+            services.AddDependencyResolvers(new ICoreModule[] {
+               new CoreModule()
+            });
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {

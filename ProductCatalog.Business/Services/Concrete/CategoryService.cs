@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.FluentValidation.CategoryValidation;
@@ -22,7 +23,8 @@ namespace ProductCatalog.Business.Services.Concrete
             _mapper = mapper;
         }
 
-        //[ValidationAspect(typeof(CommandCategoryDtoValidator))]
+        [ValidationAspect(typeof(CommandCategoryDtoValidator))]
+        [SecuredOperation("category.add,admin")]
         public IResult Add(CommandCategoryDto category)
         {
             IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName));

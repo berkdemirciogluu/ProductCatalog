@@ -17,9 +17,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.LastName)
                 .Not.Nullable();
 
-            Map(b => b.UserName)
-                .Not.Nullable();
-
             Map(b => b.Email)
                 .Not.Nullable();
 
