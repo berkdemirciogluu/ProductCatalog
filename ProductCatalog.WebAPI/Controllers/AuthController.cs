@@ -8,7 +8,6 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AuthController : Controller
     {
         private IAuthService _authService;

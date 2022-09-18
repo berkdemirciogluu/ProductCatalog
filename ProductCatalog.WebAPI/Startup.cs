@@ -65,6 +65,10 @@ namespace ProductCatalog.WebAPI
             });
             services.AddSingleton(mapperConfig.CreateMapper());
 
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "PayCOre", Version = "v1" });
+            //});
 
             services.AddControllers();
         }
@@ -79,7 +83,7 @@ namespace ProductCatalog.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PayCore"));
             }
 
-            app.UseHttpsRedirection();            
+            app.UseHttpsRedirection();
 
             app.UseAuthentication();
 
