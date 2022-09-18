@@ -13,9 +13,11 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Id(x => x.Id);
 
-            References(b => b.User);
+            Map(b => b.UserId);
+            References(b => b.User,"user_id").Cascade.None();
 
-            References(b => b.Product);
+            Map(b => b.ProductId);
+            References(b => b.Product, "product_id").Cascade.None();
 
             Map(b => b.IsApproved)
                 .Not.Nullable();
@@ -26,8 +28,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.OfferedPrice)
                 .Not.Nullable();
 
-            //Map(b => b.UserId);
-            //Map(b => b.ProductId);
+            
+            
         }
     }
 }

@@ -12,13 +12,15 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
         {
             Table("tblproduct");
 
-            Id(x => x.Id);
+            Id(b => b.Id);
 
-            References(b => b.User);
+            Map(b => b.UserId);
+            References(b => b.User, "user_id").Cascade.None();
 
-            References(b => b.Category);
+            Map(b => b.CategoryId);
+            References(b => b.Category, "category_id").Cascade.None();
 
-            HasManyToMany(b => b.Offers).Inverse().Cascade.All();
+            HasMany(b => b.Offers).KeyColumn("product_id").Inverse().Cascade.All();    
 
             Map(b => b.ProductName)
                 .Not.Nullable();
@@ -30,9 +32,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
                 .Not.Nullable();
 
             Map(b => b.IsSold)
-                .Not.Nullable();
-
-            //Map(b => b.CategoryId);
+                .Not.Nullable();            
 
             Map(b => b.Color)
                 .Not.Nullable();

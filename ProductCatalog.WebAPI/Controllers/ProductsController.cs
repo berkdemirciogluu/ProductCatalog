@@ -48,5 +48,11 @@ namespace ProductCatalog.WebAPI.Controllers
             }
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
+
+        [HttpGet("productsforoffer")]
+        public IActionResult GetProductsOffer()
+        {
+            return Ok(_productService.GetProductsOffer());
+        }
     }
 }

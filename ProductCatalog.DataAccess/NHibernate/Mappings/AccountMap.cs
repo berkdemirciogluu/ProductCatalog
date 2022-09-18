@@ -14,13 +14,15 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Id(x => x.Id);
 
-            References(b => b.User);
+            Map(b => b.UserId);
+            
+            HasMany(b => b.User).
 
             References(b => b.Product);
 
             References(b => b.Offer);
 
-            //Map(b => b.UserId);
+            
         }
     }
 }

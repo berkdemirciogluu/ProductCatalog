@@ -40,22 +40,19 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IResult Delete(int id)
         {
+
+            IResult result = BusinessRules.Run(CheckIfCategoryInvalid(id));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
             var categoryToDelete = _categoryRepository.GetById(id);
-            if (categoryToDelete == null)
-            {
-                return new ErrorResult(Messages.CategoryInvalid);
-            }
+            _categoryRepository.Delete(categoryToDelete.Id);
 
-            try
-            {
-                _categoryRepository.Delete(categoryToDelete.Id);
-                return new SuccessResult(Messages.CategoryDeleted);
-            }
-            catch (Exception)
-            {
+            return new SuccessResult(Messages.CategoryDeleted);
 
-                return new ErrorResult(Messages.CategoryNotDeleted);
-            }
         }
 
         public IDataResult<List<CategoryDto>> GetAll()

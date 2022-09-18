@@ -52,5 +52,10 @@ namespace ProductCatalog.Business.Services.Concrete
             var result = _mapper.Map<List<GetProductDto>>(products);
             return new SuccessDataResult<List<GetProductDto>>(result); 
         }
+
+        public IDataResult<List<ProductOfferDto>> GetProductsOffer()
+        {
+            return new SuccessDataResult<List<ProductOfferDto>>(_productRepository.GetProductsOffer());
+        }
     }
 }
