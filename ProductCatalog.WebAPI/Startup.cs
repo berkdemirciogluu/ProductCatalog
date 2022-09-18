@@ -1,12 +1,16 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.Services.Concrete;
+using ProductCatalog.Core.Utilities.Security.Encryption;
+using ProductCatalog.Core.Utilities.Security.JWT;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.Entities.MappingProfiles;
@@ -27,9 +31,24 @@ namespace ProductCatalog.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddScoped<ICategoryService, CategoryService>();
-            //services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
+
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -55,6 +74,8 @@ namespace ProductCatalog.WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseAuthorization();
 

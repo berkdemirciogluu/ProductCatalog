@@ -13,13 +13,13 @@ namespace ProductCatalog.Business.Constants
         public static string CategoryListed = "Categories are listed";
         public static string CategoryUpdated = "Category is updated";
         public static string CategoryNotUpdated = "Category could not be updated";
-
         public static string ProductInvalid = "Product is invalid";
         public static string ProductDeleted = "Product is deleted";
         public static string ProductNotDeleted = "Product could not be deleted";
         public static string CategoryNameAlreadyExists = "Category name already exist";
-
         public static string LoginWarning = "Wrong Username or Password.";
         public static string SuccesfulLogin = "Wrong Username or Password.";
         public static string UserRegistered = "Wrong Username or Password.";
+        public static string TokenGenerated = "Token Generated";
     }
+}

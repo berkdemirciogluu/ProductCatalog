@@ -5,6 +5,7 @@ using Castle.DynamicProxy;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.Services.Concrete;
 using ProductCatalog.Core.Utilities.Interceptors;
+using ProductCatalog.Core.Utilities.Security.JWT;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.Entities.MappingProfiles;
@@ -19,15 +20,15 @@ namespace ProductCatalog.Business.DependecyResolvers.Autofac
             builder.RegisterType<ProductService>().As<IProductService>().SingleInstance();
             builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
 
-
-            //services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
-
             builder.RegisterType<CategoryService>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
 
-            //services.AddScoped<ICategoryService, CategoryService>();
-            //services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
+
+            builder.RegisterType<AuthService>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
