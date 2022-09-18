@@ -17,6 +17,7 @@ using ProductCatalog.Core.Utilities.Security.JWT;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.Entities.MappingProfiles;
+using ProductCatalog.WebAPI.Extensions.Swagger;
 using System.Reflection;
 
 namespace ProductCatalog.WebAPI
@@ -33,7 +34,7 @@ namespace ProductCatalog.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -52,6 +53,8 @@ namespace ProductCatalog.WebAPI
                     };
                 });
 
+            services.AddCustomizeSwagger();
+
             services.AddDependencyResolvers(new ICoreModule[] {
                new CoreModule()
             });
@@ -62,10 +65,8 @@ namespace ProductCatalog.WebAPI
             });
             services.AddSingleton(mapperConfig.CreateMapper());
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProductCatalog.WebAPI", Version = "v1" });
-            });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,14 +76,14 @@ namespace ProductCatalog.WebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalog.WebAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PayCore"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection();            
+
+            app.UseAuthentication();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseAuthorization();
 

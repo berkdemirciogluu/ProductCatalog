@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.DTOs.User;
@@ -7,6 +8,7 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthController : Controller
     {
         private IAuthService _authService;
@@ -16,8 +18,8 @@ namespace ProductCatalog.WebAPI.Controllers
             _authService = authService;
         }
 
-        [HttpPost("login")]
-        public ActionResult Login(UserForLoginDto userForLoginDto)
+        [HttpPost("Login")]
+        public ActionResult Login([FromBody] UserForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto);
             if (!userToLogin.Success)
@@ -34,8 +36,8 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpPost("register")]
-        public ActionResult Register(UserForRegisterDto userForRegisterDto)
+        [HttpPost("Register")]
+        public ActionResult Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
             var userExists = _authService.UserExists(userForRegisterDto.Email);
             if (!userExists.Success)
