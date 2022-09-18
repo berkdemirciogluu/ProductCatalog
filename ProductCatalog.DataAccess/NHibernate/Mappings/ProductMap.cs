@@ -14,13 +14,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Id(b => b.Id);
 
-            Map(b => b.UserId);
-            References(b => b.User, "user_id").Cascade.None();
-
             Map(b => b.CategoryId);
-            References(b => b.Category, "category_id").Cascade.None();
 
-            HasMany(b => b.Offers).KeyColumn("product_id").Inverse().Cascade.All();    
+            Map(b => b.UserId);
 
             Map(b => b.ProductName)
                 .Not.Nullable();

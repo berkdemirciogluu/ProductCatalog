@@ -53,9 +53,9 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessDataResult<List<GetProductDto>>(result); 
         }
 
-        public IDataResult<List<ProductOfferDto>> GetProductsOffer()
-        {
-            return new SuccessDataResult<List<ProductOfferDto>>(_productRepository.GetProductsOffer());
-        }
+        //public IDataResult<List<ProductOfferDto>> GetProductsOffer()
+        //{
+        //    return new SuccessDataResult<List<ProductOfferDto>>(_productRepository.GetProductsOffer());
+        //}
     }
 }

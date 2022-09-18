@@ -9,5 +9,6 @@ namespace ProductCatalog.Entities.DTOs.Category
     public class CommandCategoryDto
     {
         public virtual string CategoryName { get; set; }
+
     }
 }

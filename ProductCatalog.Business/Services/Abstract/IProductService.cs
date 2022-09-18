@@ -8,6 +8,6 @@ namespace ProductCatalog.Business.Services.Abstract
         IDataResult<List<GetProductDto>> GetAll();
         IResult Add(AddProductDto entity);
         IResult Delete(int id);
-        IDataResult<List<ProductOfferDto>> GetProductsOffer();
+        //IDataResult<List<ProductOfferDto>> GetProductsOffer();
     }
 }

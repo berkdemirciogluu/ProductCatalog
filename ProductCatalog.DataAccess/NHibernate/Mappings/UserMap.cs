@@ -1,11 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
-using ProductCatalog.Core.Entities.Concrete;
 using ProductCatalog.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.DataAccess.NHibernate.Mappings
 {

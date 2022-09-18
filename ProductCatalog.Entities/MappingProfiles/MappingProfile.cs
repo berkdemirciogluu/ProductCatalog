@@ -19,6 +19,7 @@ namespace ProductCatalog.Entities.MappingProfiles
 
             CreateMap<AddProductDto, Product>().ReverseMap();
             CreateMap<Product, GetProductDto>().ReverseMap();
+            //CreateMap<Product, GetProductDto>().ForMember(dst => dst.CategoryInfo, src => src.MapFrom(src => new Category() { CategoryName = src.CategoryInfo.CategoryName }));
 
         }
     }

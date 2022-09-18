@@ -22,7 +22,7 @@ namespace ProductCatalog.Business.Services.Concrete
             _mapper = mapper;
         }
 
-        [ValidationAspect(typeof(CommandCategoryDtoValidator))]
+        //[ValidationAspect(typeof(CommandCategoryDtoValidator))]
         public IResult Add(CommandCategoryDto category)
         {
             IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName));

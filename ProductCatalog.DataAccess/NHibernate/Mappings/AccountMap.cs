@@ -13,16 +13,17 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Table("tblaccount");
 
             Id(x => x.Id);
-
             Map(b => b.UserId);
-            
-            HasMany(b => b.User).
+            Map(b => b.ProductId);
+            Map(b => b.OfferId);
 
-            References(b => b.Product);
+            //References(b => b.User);
 
-            References(b => b.Offer);
+            //References(b => b.Product);
 
-            
+            //References(b => b.Offer);
+
+
         }
     }
 }
