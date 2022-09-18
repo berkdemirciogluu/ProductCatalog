@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using ProductCatalog.Entities.DTOs.Product;
+using System.Runtime.Serialization;
 
 namespace ProductCatalog.Business.Constants
 {
@@ -27,5 +28,9 @@ namespace ProductCatalog.Business.Constants
         public static string ProductUpdated = "Product is updated";
 
         public static string NotProductOwner = "You do not own this product.";
+
+        public static string UserInvalid = "User invalid";
+
+        public static string ProductsListed = "Products listed";
     }
 }

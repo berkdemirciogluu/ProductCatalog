@@ -74,13 +74,15 @@ namespace ProductCatalog.Business.Services.Concrete
             _productRepository.Update(productToUpdate);
             return new SuccessResult(Messages.ProductUpdated);
         }
-
-
-
-        //public IDataResult<List<ProductOfferDto>> GetProductsOffer()
-        //{
-        //    return new SuccessDataResult<List<ProductOfferDto>>(_productRepository.GetProductsOffer());
-        //}
+        
+        public IDataResult<List<GetProductDto>> GetUserProducts(string userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return new ErrorDataResult<List<GetProductDto>>(Messages.UserInvalid);
+            }
+            return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetUserProducts(userId),Messages.ProductsListed);
+        }
 
 
         public IResult CheckIfProductInvalid(int id)

@@ -9,7 +9,6 @@ namespace ProductCatalog.Business.Services.Abstract
         IResult Add(AddProductDto entity, string userId);
         IResult Delete(int id);
         IResult Update(UpdateProductDto entity, int id, string userId);
-
-        //IDataResult<List<ProductOfferDto>> GetProductsOffer();
+        IDataResult<List<GetProductDto>> GetUserProducts(string userId);
     }
 }

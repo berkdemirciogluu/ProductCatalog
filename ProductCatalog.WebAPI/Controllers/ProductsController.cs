@@ -64,5 +64,17 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
 
         }
+
+        [HttpGet("GetUserProducts")]
+        public IActionResult GetUserProducts()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _productService.GetUserProducts(userId);
+            if (result.Success)
+            {
+                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+            }
+            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+        }
     }
 }
