@@ -76,5 +76,16 @@ namespace ProductCatalog.WebAPI.Controllers
             }
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
+
+        [HttpGet("GetProductsByCategoryId")]
+        public IActionResult GetProductsByCategoryId([FromQuery] int categoryId)
+        {
+            var result = _productService.GetProductsByCategoryId(categoryId); //The method to obtain all the items in the list.
+            if (result.Success)
+            {
+                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+            }
+            return BadRequest(result);
+        }
     }
 }

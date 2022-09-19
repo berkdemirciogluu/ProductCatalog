@@ -15,5 +15,6 @@ namespace ProductCatalog.Business.Services.Abstract
         IResult Add(CommandCategoryDto entity);
         IResult Delete(int id);
         IResult Update(CommandCategoryDto entity,int id);
+
     }
 }

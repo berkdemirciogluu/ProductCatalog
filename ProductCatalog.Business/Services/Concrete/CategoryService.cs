@@ -2,6 +2,7 @@
 using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules;
 using ProductCatalog.Business.ValidationRules.FluentValidation.CategoryValidation;
 using ProductCatalog.Core.Aspects.Autofac.Validation;
 using ProductCatalog.Core.CrossCuttingConcerns.Validation;
@@ -16,18 +17,20 @@ namespace ProductCatalog.Business.Services.Concrete
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRules _categoryRules;
         private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, ICategoryRules categoryRules)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+            _categoryRules = categoryRules;
         }
 
         [ValidationAspect(typeof(CommandCategoryDtoValidator))]
         [SecuredOperation("category.add,admin")]
         public IResult Add(CommandCategoryDto category)
         {
-            IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName));
+            IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryNameExist(category.CategoryName));
 
             if (result != null)
             {
@@ -43,7 +46,7 @@ namespace ProductCatalog.Business.Services.Concrete
         public IResult Delete(int id)
         {
 
-            IResult result = BusinessRules.Run(CheckIfCategoryInvalid(id));
+            IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(id));
 
             if (result != null)
             {
@@ -68,8 +71,8 @@ namespace ProductCatalog.Business.Services.Concrete
         [ValidationAspect(typeof(CommandCategoryDtoValidator))]
         public IResult Update(CommandCategoryDto category, int id)
         {
-            IResult result = BusinessRules.Run(CheckIfCategoryNameExist(category.CategoryName),
-                                               CheckIfCategoryInvalid(id));
+            IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryNameExist(category.CategoryName),
+                                               _categoryRules.CheckIfCategoryInvalid(id));
             if (result != null)
             {
                 return new ErrorResult(result.Message);
@@ -81,25 +84,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.CategoryUpdated);
         }
 
-        public IResult CheckIfCategoryNameExist(string categoryName)
-        {
-            var result = _categoryRepository.GetAll(p => p.CategoryName == categoryName).Any();
-            if (result)
-            {
-                return new ErrorResult(Messages.CategoryNameAlreadyExists);
-            }
-            return new SuccessResult();
-        }
 
-        public IResult CheckIfCategoryInvalid(int id)
-        {
-            var result = _categoryRepository.GetById(id);
-            if (result == null)
-            {
-                return new ErrorResult(Messages.CategoryInvalid);
-            }
-            return new SuccessResult();
-        }
 
     }
 }

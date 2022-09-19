@@ -33,6 +33,26 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
             return query;
         }
 
+        public List<GetProductDto> GetProductsByCategoryId(int categoryId)
+        {
+            var query = (from product in Entities
+                         join category in _categoryRepository.Entities on product.CategoryId equals category.Id
+                         where product.CategoryId == categoryId
+                         select new GetProductDto
+                         {
+                             Id = product.Id,
+                             ProductName = product.ProductName,
+                             Description = product.Description,
+                             IsOfferable = product.IsOfferable,
+                             CategoryName = category.CategoryName,
+                             Color = product.Color,
+                             Brand = product.Brand,
+                             Price = product.Price,
+                         }).ToList();
+
+            return query;
+        }
+
         public List<GetProductDto> GetUserProducts(string userId)
         {
 

@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ProductCatalog.DataAccess\ProductCatalog.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ValidationRules\CustomValidation\CategoryValidation\" />
-  </ItemGroup>
-
 </Project>

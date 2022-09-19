@@ -2,6 +2,8 @@
 using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules;
+using ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules;
 using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
@@ -14,11 +16,15 @@ namespace ProductCatalog.Business.Services.Concrete
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IProductRules _productRules;
+        private readonly ICategoryRules _categoryRules;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IMapper mapper, IProductRules productRules,ICategoryRules categoryRules)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _productRules = productRules;
+            _categoryRules = categoryRules;
         }
 
         [SecuredOperation("admin")]
@@ -35,7 +41,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IResult Delete(int id)
         {
-            var result = BusinessRules.Run(CheckIfProductInvalid(id));
+            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id));
 
             if (result != null)
             {
@@ -58,7 +64,7 @@ namespace ProductCatalog.Business.Services.Concrete
         {
 
             var productToUpdate = _productRepository.GetById(id);
-            IResult result = BusinessRules.Run(CheckIfProductInvalid(id), CheckProductOwner(productToUpdate, userId));
+            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id),_productRules.CheckProductOwner(productToUpdate, userId));
 
             if (result != null)
             {
@@ -84,24 +90,17 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetUserProducts(userId),Messages.ProductsListed);
         }
 
-
-        public IResult CheckIfProductInvalid(int id)
+        public IDataResult<List<GetProductDto>> GetProductsByCategoryId(int categoryId)
         {
-            var result = _productRepository.GetById(id);
-            if (result == null)
+            var result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(categoryId));
+            if (result != null)
             {
-                return new ErrorResult(Messages.ProductInvalid);
+                return new ErrorDataResult<List<GetProductDto>>(result.Message);
             }
-            return new SuccessResult();
+            return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetProductsByCategoryId(categoryId),Messages.ProductsListed);
         }
 
-        public IResult CheckProductOwner(Product product, string userId)
-        {
-            if(product.UserId != Convert.ToInt32(userId))
-            {
-                return new ErrorResult(Messages.NotProductOwner);
-            }
-            return new SuccessResult();
-        }
+
+
     }
 }

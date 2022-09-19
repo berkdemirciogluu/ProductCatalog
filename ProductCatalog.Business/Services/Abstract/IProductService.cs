@@ -1,4 +1,5 @@
 ﻿using ProductCatalog.Core.Utilities.Results;
+using ProductCatalog.Entities.Concrete;
 using ProductCatalog.Entities.DTOs.Product;
 
 namespace ProductCatalog.Business.Services.Abstract
@@ -10,5 +11,7 @@ namespace ProductCatalog.Business.Services.Abstract
         IResult Delete(int id);
         IResult Update(UpdateProductDto entity, int id, string userId);
         IDataResult<List<GetProductDto>> GetUserProducts(string userId);
+        IDataResult<List<GetProductDto>> GetProductsByCategoryId(int categoryId);
+
     }
 }
