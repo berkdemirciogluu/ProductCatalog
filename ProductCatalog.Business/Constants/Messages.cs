@@ -1,4 +1,5 @@
-﻿using ProductCatalog.Entities.DTOs.Product;
+﻿using ProductCatalog.Entities.DTOs.Offer;
+using ProductCatalog.Entities.DTOs.Product;
 using System.Runtime.Serialization;
 
 namespace ProductCatalog.Business.Constants
@@ -54,5 +55,9 @@ namespace ProductCatalog.Business.Constants
         public static string OfferCannotWitdrawn = "Offer has been already approved. You cannot withdraw your off back.";
 
         public static string OfferWithdrawn = "Offer is withdrawn.";
+
+        public static string NoUserOffer = "You do not have any offer record";
+
+        public static string NoUserProductOffer = "There is no any offer to your product.";
     }
 }

@@ -33,6 +33,7 @@ namespace ProductCatalog.Business.Services.Concrete
             var product = _mapper.Map<Product>(entity);
 
             product.UserId = Convert.ToInt32(userId);
+            product.OfferId = default;
             product.IsOfferable = true;
             product.IsSold = false;
             _productRepository.Add(product);
@@ -65,6 +66,10 @@ namespace ProductCatalog.Business.Services.Concrete
         {
 
             var productToUpdate = _productRepository.GetById(id);
+            if (productToUpdate == null)
+            {
+                return new ErrorResult(Messages.ProductInvalid);
+            }
             var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id),_productRules.CheckProductOwner(productToUpdate, userId));
 
             if (result != null)
@@ -118,7 +123,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IResult SellProduct(SellProductDto entity, string userId)
         {
-            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(entity.ProductId);
+            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(entity.ProductId));
             if (result != null)
             {
                 return new ErrorResult(result.Message);

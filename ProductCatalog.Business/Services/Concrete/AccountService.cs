@@ -22,11 +22,21 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IDataResult<List<GetUserOfferDto>> GetUserOfferedProducts(string userId)
         {
+            var result = _offerRepository.Entities.Where(x => x.UserId == Convert.ToInt32(userId)).ToList();
+            if (result == null)
+            {
+                return new ErrorDataResult<List<GetUserOfferDto>>(Messages.NoUserProductOffer);
+            }
             return new SuccessDataResult<List<GetUserOfferDto>>(_offerRepository.GetUserOfferedProducts(userId),Messages.ProductsListed);
         }
 
         public IDataResult<List<GetUserOfferDto>> GetUserOffers(string userId)
         {
+            var result = _offerRepository.Entities.Where(x => x.UserId == Convert.ToInt32(userId)).ToList();
+            if (result == null)
+            {
+                return new ErrorDataResult<List<GetUserOfferDto>>(Messages.NoUserOffer);
+            }
             return new SuccessDataResult<List<GetUserOfferDto>>(_offerRepository.GetUserOffers(userId), Messages.OffersListed);
         }
     }
