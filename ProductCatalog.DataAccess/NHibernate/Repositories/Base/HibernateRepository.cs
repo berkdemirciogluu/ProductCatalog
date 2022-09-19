@@ -9,7 +9,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
     public class HibernateRepository<TEntity> : IHibernateRepository<TEntity> where TEntity : BaseEntity
     {
 
-        public IQueryable<TEntity> Entities => NHibernatePostgreSqlContext.SessionOpen().Query<TEntity>().OrderBy(x => x.Id);
+        public IQueryable<TEntity> Entities => NHibernatePostgreSqlContext.SessionOpen().Query<TEntity>();
 
         public void Add(TEntity entity)
         {

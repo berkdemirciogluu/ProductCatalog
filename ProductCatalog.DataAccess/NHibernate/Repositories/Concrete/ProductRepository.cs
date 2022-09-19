@@ -32,9 +32,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
         //}
         public List<GetProductDto> GetUserProducts(string userId)
         {
-            var a = Entities.SingleOrDefault(x => x.Id == 10);
-            var b = Entities.SingleOrDefault(x => x.Id == 11);
-            var query = from product in Entities
+
+            var query = (from product in Entities
                         join category in _categoryRepository.Entities on product.CategoryId equals category.Id
                         where product.UserId == Convert.ToInt32(userId)
                         select new GetProductDto
@@ -47,8 +46,9 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
                             Color = product.Color,
                             Brand = product.Brand,
                             Price = product.Price,
-                        };
-            return query.ToList();
+                        }).ToList();
+
+            return query;
         }
     }
 }
