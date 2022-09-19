@@ -25,8 +25,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
             var result = (from offer in Entities
                          join product in _productRepository.Entities on offer.ProductId equals product.Id
                          join category in _categoryRepository.Entities on product.CategoryId equals category.Id
-                         where offer.UserId == Convert.ToInt32(userId) & offer.IsDeleted == false
-                         select new GetUserOfferDto()
+                         where product.UserId == Convert.ToInt32(userId) && offer.IsDeleted == false
+                          select new GetUserOfferDto()
                          {
                              Id = offer.Id,
                              OfferedPrice = offer.OfferedPrice,
@@ -48,11 +48,11 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 
         public List<GetUserOfferDto> GetUserOffers(string userId)
         {
-            var result = (from user in _userRepository.Entities
-                         join product in _productRepository.Entities
-                         on user.Id equals product.UserId
-                         join offer in Entities on product.Id equals offer.ProductId
-                         where user.Id == Convert.ToInt32(userId) & offer.IsDeleted == false & user.IsDeleted == false
+            var result = (from offer in Entities
+                         join product in _productRepository.Entities on offer.ProductId equals product.Id
+                         join category in _categoryRepository.Entities on product.CategoryId equals category.Id
+                         join user in _userRepository.Entities on offer.UserId equals user.Id
+                         where offer.UserId == Convert.ToInt32(userId) && offer.IsDeleted == false && user.IsDeleted == false
                          select new GetUserOfferDto
                          {
                              Id = offer.Id,
