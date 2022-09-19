@@ -18,6 +18,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
         {
             var query = (from product in Entities
                          join category in _categoryRepository.Entities on product.CategoryId equals category.Id
+                         where product.IsDeleted == false
                          select new GetProductDto
                          {
                              Id = product.Id,
@@ -37,7 +38,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
         {
             var query = (from product in Entities
                          join category in _categoryRepository.Entities on product.CategoryId equals category.Id
-                         where product.CategoryId == categoryId
+                         where product.CategoryId == categoryId && product.IsDeleted == false
                          select new GetProductDto
                          {
                              Id = product.Id,
@@ -58,7 +59,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
 
             var query = (from product in Entities
                         join category in _categoryRepository.Entities on product.CategoryId equals category.Id
-                        where product.UserId == Convert.ToInt32(userId)
+                        where product.UserId == Convert.ToInt32(userId) && product.IsDeleted == false
                         select new GetProductDto
                         {
                             Id = product.Id,

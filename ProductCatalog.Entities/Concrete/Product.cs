@@ -7,11 +7,14 @@
         public virtual int OfferId { get; set; }
         public virtual string ProductName { get; set; }
         public virtual string Description { get; set; }
-        public virtual bool IsOfferable { get; set; }
+        public virtual bool IsOfferable { get; set; } = false;
         public virtual bool IsSold { get; set; }
         public virtual string Color { get; set; }
         public virtual string Brand { get; set; }
         public virtual double Price { get; set; }
+
+        //---------
+        //public virtual Category Category { get; set; }
 
     }
 }

@@ -66,7 +66,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
         {
             using (ISession _session = NHibernatePostgreSqlContext.SessionOpen())
             {
-                return _session.Query<TEntity>().SingleOrDefault(filter);
+                return _session.Query<TEntity>().Where(filter).SingleOrDefault(e => e.IsDeleted == false);
             }
         }
 
@@ -75,8 +75,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
             using (ISession _session = NHibernatePostgreSqlContext.SessionOpen())
             {
                 return filter == null
-                ? _session.Query<TEntity>().ToList()
-                : _session.Query<TEntity>().Where(filter).ToList().ToList();
+                ? _session.Query<TEntity>().Where(e => e.IsDeleted == false).ToList()
+                : _session.Query<TEntity>().Where(filter).ToList().Where(e => e.IsDeleted == false).ToList();
             }            
         }
 
@@ -84,7 +84,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
         {
             using (ISession _session = NHibernatePostgreSqlContext.SessionOpen())
             {
-                return _session.Query<TEntity>().SingleOrDefault(e => e.Id == id);
+                return _session.Query<TEntity>().Where(e => e.IsDeleted == false).SingleOrDefault(e => e.Id == id);
             }
         }
 

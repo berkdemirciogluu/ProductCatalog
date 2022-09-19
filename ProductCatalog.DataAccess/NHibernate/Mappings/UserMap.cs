@@ -25,7 +25,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.PasswordSalt);
 
             Map(b => b.Status);
-
+            Map(b => b.IsDeleted);
         }
     }
 }

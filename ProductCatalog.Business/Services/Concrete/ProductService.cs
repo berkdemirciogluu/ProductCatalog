@@ -27,13 +27,13 @@ namespace ProductCatalog.Business.Services.Concrete
             _categoryRules = categoryRules;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IResult Add(AddProductDto entity, string userId)
         {
             var product = _mapper.Map<Product>(entity);
 
             product.UserId = Convert.ToInt32(userId);
-            product.IsOfferable = true;
+            product.IsOfferable = false;
             product.IsSold = false;
             _productRepository.Add(product);
             return new SuccessResult(Messages.ProductAdded);
@@ -49,7 +49,8 @@ namespace ProductCatalog.Business.Services.Concrete
             }
 
             var productToDelete = _productRepository.GetById(id);
-            _productRepository.Delete(productToDelete.Id);
+            productToDelete.IsDeleted = true;
+            _productRepository.Update(productToDelete);
             return new SuccessResult(Messages.ProductDeleted);
         }
 
@@ -99,8 +100,5 @@ namespace ProductCatalog.Business.Services.Concrete
             }
             return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetProductsByCategoryId(categoryId),Messages.ProductsListed);
         }
-
-
-
     }
 }

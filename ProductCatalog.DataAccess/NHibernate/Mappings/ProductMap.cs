@@ -18,6 +18,8 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Map(b => b.UserId);
 
+            Map(b => b.OfferId);
+
             Map(b => b.ProductName)
                 .Not.Nullable();
 
@@ -38,7 +40,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Map(b => b.Price)
                 .Not.Nullable();
-
+            Map(b => b.IsDeleted);
         }
     }
 }

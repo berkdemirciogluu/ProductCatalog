@@ -27,7 +27,7 @@ namespace ProductCatalog.Business.Services.Concrete
         }
 
         [ValidationAspect(typeof(CommandCategoryDtoValidator))]
-        [SecuredOperation("category.add,admin")]
+        //[SecuredOperation("category.add,admin")]
         public IResult Add(CommandCategoryDto category)
         {
             IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryNameExist(category.CategoryName));
@@ -54,7 +54,8 @@ namespace ProductCatalog.Business.Services.Concrete
             }
 
             var categoryToDelete = _categoryRepository.GetById(id);
-            _categoryRepository.Delete(categoryToDelete.Id);
+            categoryToDelete.IsDeleted = true;
+            _categoryRepository.Update(categoryToDelete);
 
             return new SuccessResult(Messages.CategoryDeleted);
 

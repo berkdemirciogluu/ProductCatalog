@@ -27,10 +27,22 @@ namespace ProductCatalog.Business.Constants
 
         public static string ProductUpdated = "Product is updated";
 
-        public static string NotProductOwner = "You do not own this product.";
+        public static string NotProductOwner = "You do not own this product";
 
         public static string UserInvalid = "User invalid";
 
         public static string ProductsListed = "Products listed";
+
+        public static string ProductNotSaled = "Product is not on sale";
+
+        public static string OfferAccepted = "Offer is accepted";
+
+        public static string OfferInvalid = "Offer is invalid";
+
+        public static string OfferDeleted = "Offer is deleted";
+
+        public static string OfferUpdated = "Offer updated";
+
+        public static string OfferApproved = "Offer is approved.";
     }
 }

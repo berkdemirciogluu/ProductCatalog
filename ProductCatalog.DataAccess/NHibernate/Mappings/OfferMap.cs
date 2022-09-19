@@ -27,7 +27,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Map(b => b.OfferedPrice)
                 .Not.Nullable();
-
+            Map(b => b.IsDeleted);
         }
     }
 }
