@@ -7,5 +7,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Abstract
     public interface IProductRepository : IHibernateRepository<Product>
     {
         public List<GetProductDto> GetUserProducts(string userId);
+        public List<GetProductDto> GetProducts();
     }
 }

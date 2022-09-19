@@ -49,7 +49,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IDataResult<List<GetProductDto>> GetAll()
         {
-            var products = _productRepository.GetAll();
+            var products = _productRepository.GetProducts();
             var result = _mapper.Map<List<GetProductDto>>(products);
             return new SuccessDataResult<List<GetProductDto>>(result);
         }

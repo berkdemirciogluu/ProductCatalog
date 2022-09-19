@@ -14,22 +14,25 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
             _categoryRepository = categoryRepository;
         }
 
-        //public List<ProductOfferDto> GetProductsOffer()
-        //{
+        public List<GetProductDto> GetProducts()
+        {
+            var query = (from product in Entities
+                         join category in _categoryRepository.Entities on product.CategoryId equals category.Id
+                         select new GetProductDto
+                         {
+                             Id = product.Id,
+                             ProductName = product.ProductName,
+                             Description = product.Description,
+                             IsOfferable = product.IsOfferable,
+                             CategoryName = category.CategoryName,
+                             Color = product.Color,
+                             Brand = product.Brand,
+                             Price = product.Price,
+                         }).ToList();
 
-        //    var query = from p in Entities
-        //                join c in _context.Categories on p.CategoryId equals c.Id
-        //                where p.IsDeleted == false && p.IsOfferable == true
-        //                select new ProductOfferDto
-        //                {
-        //                    CategoryName = c.CategoryName,
-        //                    Id = p.Id,
-        //                    Price = p.Price,
-        //                    ProductName = p.ProductName
-        //                };
-        //    return query.ToList();
+            return query;
+        }
 
-        //}
         public List<GetProductDto> GetUserProducts(string userId)
         {
 
