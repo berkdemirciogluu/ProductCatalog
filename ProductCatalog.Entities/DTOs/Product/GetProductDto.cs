@@ -12,7 +12,7 @@ namespace ProductCatalog.Entities.DTOs.Product
         public virtual int Id { get; set; }
         public virtual string ProductName { get; set; }
         public virtual string Description { get; set; }
-        public virtual bool IsOfferable { get; set; } = false;
+        public virtual bool IsOfferable { get; set; } 
         public virtual string CategoryName { get; set; }
         public virtual string Color { get; set; }
         public virtual string Brand { get; set; }
