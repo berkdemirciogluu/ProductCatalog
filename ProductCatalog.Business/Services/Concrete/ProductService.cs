@@ -33,7 +33,7 @@ namespace ProductCatalog.Business.Services.Concrete
             var product = _mapper.Map<Product>(entity);
 
             product.UserId = Convert.ToInt32(userId);
-            product.IsOfferable = false;
+            product.IsOfferable = true;
             product.IsSold = false;
             _productRepository.Add(product);
             return new SuccessResult(Messages.ProductAdded);

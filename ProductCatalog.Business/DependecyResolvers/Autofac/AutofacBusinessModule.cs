@@ -23,6 +23,10 @@ namespace ProductCatalog.Business.DependecyResolvers.Autofac
             builder.RegisterType<CategoryService>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
 
+
+            builder.RegisterType<OfferService>().As<IOfferService>().SingleInstance();
+            builder.RegisterType<OfferRepository>().As<IOfferRepository>().SingleInstance();
+
             builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
 
