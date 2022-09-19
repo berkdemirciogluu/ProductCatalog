@@ -1,4 +1,5 @@
 ﻿using ProductCatalog.Core.Utilities.Results;
+using ProductCatalog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules
     public interface IOfferRule
     {
         IResult CheckIfOfferInvalid(int id);
+        IResult CheckOfferOwner(Offer offer, string userId);
     }
 }

@@ -60,6 +60,8 @@ namespace ProductCatalog.Business.Services.Concrete
 
             var offer = _mapper.Map<Offer>(entity);
             offer.UserId = Convert.ToInt32(userId);
+            offer.IsApproved = false;
+            offer.IsSold = false;
             _offerRepository.Add(offer);
             return new SuccessResult(Messages.OfferAccepted);
 
@@ -67,14 +69,15 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IResult Update(UpdateOfferDto entity, string userId, int offerId)
         {
-            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId), _productRules.CheckIfProductInvalid(entity.ProductId));
+            var offer = _offerRepository.GetById(offerId);
+
+            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId), _productRules.CheckIfProductInvalid(entity.ProductId), 
+                _offerRules.CheckOfferOwner(offer,userId));
 
             if (result != null)
             {
                 return new ErrorResult(result.Message);
             }
-
-            var offer = _offerRepository.GetById(offerId);
 
             offer.ProductId = entity.ProductId != default ? entity.ProductId : offer.ProductId;
             offer.OfferedPrice = entity.OfferedPrice != default ? entity.OfferedPrice : offer.OfferedPrice;
