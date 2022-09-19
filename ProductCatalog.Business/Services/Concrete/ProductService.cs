@@ -100,5 +100,30 @@ namespace ProductCatalog.Business.Services.Concrete
             }
             return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetProductsByCategoryId(categoryId),Messages.ProductsListed);
         }
+
+        public IResult UpdateIsOfferable(int id, string userId)
+        {
+            var productToUpdate = _productRepository.GetById(id);
+            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id), _productRules.CheckProductOwner(productToUpdate, userId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            productToUpdate.IsOfferable = true;
+            _productRepository.Update(productToUpdate);
+            return new SuccessResult(Messages.ProductUpdated);
+        }
+
+        public IResult SellProduct(SellProductDto entity, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<SellProductDto> GetProductsForOffer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
