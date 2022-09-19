@@ -46,5 +46,7 @@ namespace ProductCatalog.Business.Constants
         public static string OfferApproved = "Offer is approved.";
 
         public static string NotOfferOwner = "You do not have this offer record. Please check offer id";
+
+        public static string OffersListed = "Offers are listed";
     }
 }
