@@ -109,5 +109,27 @@ namespace ProductCatalog.Business.Services.Concrete
 
             return new SuccessResult(Messages.OfferApproved);
         }
+
+        public IResult WithDrawTheOffer(int offerId)
+        {
+            var result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            var offer = _offerRepository.GetById(offerId);
+
+            if (offer.IsApproved)
+            {
+                return new ErrorResult(Messages.OfferCannotWitdrawn);
+            }
+
+            offer.IsDeleted = true;
+            _offerRepository.Update(offer);
+
+            return new SuccessResult(Messages.OfferWithdrawn);
+        }
     }
 }

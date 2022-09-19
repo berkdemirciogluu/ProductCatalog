@@ -118,12 +118,29 @@ namespace ProductCatalog.Business.Services.Concrete
 
         public IResult SellProduct(SellProductDto entity, string userId)
         {
-            throw new NotImplementedException();
+            var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(entity.ProductId);
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            var product = _productRepository.GetById(entity.ProductId);
+            if (!product.IsOfferable)
+            {
+                return new ErrorResult(Messages.ProductNotSaled);
+            }
+
+            product.IsSold = true;
+            product.UserId = Convert.ToInt32(userId);
+            _productRepository.Update(product);
+
+            return new SuccessResult(Messages.ProductSold);
         }
 
-        public List<SellProductDto> GetProductsForOffer()
+        public IDataResult<List<GetProductOffersDto>> GetProductsForOffer()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<GetProductOffersDto>>(_productRepository.GetProductsForOffer(), Messages.ProductsListed);
         }
+
     }
 }

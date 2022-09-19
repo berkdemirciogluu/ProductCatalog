@@ -23,30 +23,36 @@ namespace ProductCatalog.Business.Constants
         public static string UserRegistered = "Wrong Username or Password.";
         public static string TokenGenerated = "Token Generated";
 
-        public static string ProductAdded = "Product is Added";
+        public static string ProductAdded = "Product is Added.";
 
-        public static string ProductUpdated = "Product is updated";
+        public static string ProductUpdated = "Product is updated.";
 
-        public static string NotProductOwner = "You do not own this product";
+        public static string NotProductOwner = "You do not own this product.";
 
-        public static string UserInvalid = "User invalid";
+        public static string UserInvalid = "User invalid.";
 
-        public static string ProductsListed = "Products listed";
+        public static string ProductsListed = "Products listed.";
 
-        public static string ProductNotSaled = "Product is not on sale";
+        public static string ProductNotSaled = "Product is not on sale.";
 
-        public static string OfferAccepted = "Offer is accepted";
+        public static string OfferAccepted = "Offer is accepted.";
 
-        public static string OfferInvalid = "Offer is invalid";
+        public static string OfferInvalid = "Offer is invalid.";
 
-        public static string OfferDeleted = "Offer is deleted";
+        public static string OfferDeleted = "Offer is deleted.";
 
-        public static string OfferUpdated = "Offer updated";
+        public static string OfferUpdated = "Offer updated.";
 
         public static string OfferApproved = "Offer is approved.";
 
-        public static string NotOfferOwner = "You do not have this offer record. Please check offer id";
+        public static string NotOfferOwner = "You do not have this offer record. Please check offer id.";
 
-        public static string OffersListed = "Offers are listed";
+        public static string OffersListed = "Offers are listed.";
+
+        public static string ProductSold = "Product is sold.";
+
+        public static string OfferCannotWitdrawn = "Offer has been already approved. You cannot withdraw your off back.";
+
+        public static string OfferWithdrawn = "Offer is withdrawn.";
     }
 }

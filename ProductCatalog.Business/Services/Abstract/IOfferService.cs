@@ -14,5 +14,7 @@ namespace ProductCatalog.Business.Services.Abstract
         IResult Delete(int offerId);
         IResult ApproveOffer(int offerId);
         IResult Update(UpdateOfferDto entity, string userId, int id);
+
+        IResult WithDrawTheOffer(int offerId);
     }
 }
