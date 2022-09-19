@@ -22,7 +22,7 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
         public IResult CheckIfProductInvalid(int id)
         {
             var result = _productRepository.GetById(id);
-            if (result == null)
+            if (result == null || result.IsDeleted == true)
             {
                 return new ErrorResult(Messages.ProductInvalid);
             }
@@ -32,6 +32,16 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
         public IResult CheckProductOwner(Product product, string userId)
         {
             if (product.UserId != Convert.ToInt32(userId))
+            {
+                return new ErrorResult(Messages.NotProductOwner);
+            }
+            return new SuccessResult();
+        }
+
+        public IResult CheckIfOwnProduct(int productId, string userId)
+        {
+            var product = _productRepository.GetById(productId);
+            if (product.UserId == Convert.ToInt32(userId))
             {
                 return new ErrorResult(Messages.NotProductOwner);
             }

@@ -12,5 +12,8 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
     {
         IResult CheckProductOwner(Product product, string userId);
         IResult CheckIfProductInvalid(int id);
+
+        IResult CheckIfOwnProduct(int productId, string userId);
+
     }
 }

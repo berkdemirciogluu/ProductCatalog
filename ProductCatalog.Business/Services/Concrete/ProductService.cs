@@ -30,6 +30,13 @@ namespace ProductCatalog.Business.Services.Concrete
         //[SecuredOperation("admin")]
         public IResult Add(AddProductDto entity, string userId)
         {
+            IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(entity.CategoryId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
             var product = _mapper.Map<Product>(entity);
 
             product.UserId = Convert.ToInt32(userId);

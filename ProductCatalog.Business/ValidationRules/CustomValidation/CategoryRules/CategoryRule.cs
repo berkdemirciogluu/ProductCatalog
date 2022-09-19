@@ -20,7 +20,7 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules
 
         public IResult CheckIfCategoryNameExist(string categoryName)
         {
-            var result = _categoryRepository.GetAll(p => p.CategoryName == categoryName).Any();
+            var result = _categoryRepository.GetAll(p => p.CategoryName == categoryName).Where(p => p.IsDeleted == false).Any();
             if (result)
             {
                 return new ErrorResult(Messages.CategoryNameAlreadyExists);
@@ -31,7 +31,7 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules
         public IResult CheckIfCategoryInvalid(int id)
         {
             var result = _categoryRepository.GetById(id);
-            if (result == null)
+            if (result == null || result.IsDeleted == true)
             {
                 return new ErrorResult(Messages.CategoryInvalid);
             }

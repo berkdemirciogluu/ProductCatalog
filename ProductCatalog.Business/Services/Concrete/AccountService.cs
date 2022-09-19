@@ -23,7 +23,7 @@ namespace ProductCatalog.Business.Services.Concrete
         public IDataResult<List<GetUserOfferDto>> GetUserOfferedProducts(string userId)
         {
             var result = _offerRepository.Entities.Where(x => x.UserId == Convert.ToInt32(userId)).ToList();
-            if (result == null)
+            if (result.Count == 0)
             {
                 return new ErrorDataResult<List<GetUserOfferDto>>(Messages.NoUserProductOffer);
             }
@@ -33,7 +33,7 @@ namespace ProductCatalog.Business.Services.Concrete
         public IDataResult<List<GetUserOfferDto>> GetUserOffers(string userId)
         {
             var result = _offerRepository.Entities.Where(x => x.UserId == Convert.ToInt32(userId)).ToList();
-            if (result == null)
+            if (result.Count == 0)
             {
                 return new ErrorDataResult<List<GetUserOfferDto>>(Messages.NoUserOffer);
             }
