@@ -54,6 +54,22 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Concrete
             return query;
         }
 
+        public List<GetProductOffersDto> GetProductsForOffer()
+        {
+            var query = (from product in Entities
+                        join category in _categoryRepository.Entities on product.CategoryId equals category.Id
+                        where product.IsDeleted == false && product.IsOfferable == true
+                        select new GetProductOffersDto
+                        {
+                            Id = product.Id,
+                            CategoryName = category.CategoryName,
+                            Price = product.Price,
+                            ProductName = product.ProductName
+                        }).ToList();
+
+            return query;
+        }
+
         public List<GetProductDto> GetUserProducts(string userId)
         {
 

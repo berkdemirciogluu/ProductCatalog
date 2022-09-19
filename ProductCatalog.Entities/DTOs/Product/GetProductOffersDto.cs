@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Entities.DTOs.Product
 {
-    public class ProductOfferDto
+    public class GetProductOffersDto
     {
         public virtual int Id { get; set; }
         public virtual string ProductName { get; set; }

@@ -9,6 +9,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Abstract
         public List<GetProductDto> GetUserProducts(string userId);
         public List<GetProductDto> GetProducts();
         public List<GetProductDto> GetProductsByCategoryId(int categoryId);
-        
+        public List<GetProductOffersDto> GetProductsForOffer();
+
     }
 }
