@@ -16,10 +16,10 @@ namespace ProductCatalog.Business.Services.Concrete
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
-        private readonly IProductRules _productRules;
-        private readonly ICategoryRules _categoryRules;
+        private readonly IProductRule _productRules;
+        private readonly ICategoryRule _categoryRules;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper, IProductRules productRules,ICategoryRules categoryRules)
+        public ProductService(IProductRepository productRepository, IMapper mapper, IProductRule productRules,ICategoryRule categoryRules)
         {
             _productRepository = productRepository;
             _mapper = mapper;

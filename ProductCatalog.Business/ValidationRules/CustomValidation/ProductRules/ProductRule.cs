@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
 {
-    public class ProductRules : IProductRules
+    public class ProductRule : IProductRule
     {
         IProductRepository _productRepository;
 
-        public ProductRules(IProductRepository productRepository)
+        public ProductRule(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules
 {
-    public interface ICategoryRules
+    public interface ICategoryRule
     {
         IResult CheckIfCategoryNameExist(string categoryName);
         IResult CheckIfCategoryInvalid(int id);

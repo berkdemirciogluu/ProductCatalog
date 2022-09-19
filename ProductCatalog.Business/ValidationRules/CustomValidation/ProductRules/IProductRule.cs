@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
 {
-    public interface IProductRules
+    public interface IProductRule
     {
         IResult CheckProductOwner(Product product, string userId);
         IResult CheckIfProductInvalid(int id);

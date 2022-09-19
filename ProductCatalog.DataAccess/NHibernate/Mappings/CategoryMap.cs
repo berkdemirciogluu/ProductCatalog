@@ -14,6 +14,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
 
             Map(b => b.CategoryName)
                 .Not.Nullable();
+
         }
     }
 }

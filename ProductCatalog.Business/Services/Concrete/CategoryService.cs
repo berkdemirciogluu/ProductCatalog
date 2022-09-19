@@ -17,9 +17,9 @@ namespace ProductCatalog.Business.Services.Concrete
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly ICategoryRules _categoryRules;
+        private readonly ICategoryRule _categoryRules;
         private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, ICategoryRules categoryRules)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, ICategoryRule categoryRules)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;

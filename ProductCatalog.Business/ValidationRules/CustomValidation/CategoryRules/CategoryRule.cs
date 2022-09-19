@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules
 {
-    public class CategoryRules : ICategoryRules
+    public class CategoryRule : ICategoryRule
     {
         ICategoryRepository _categoryRepository;
 
-        public CategoryRules(ICategoryRepository categoryRepository)
+        public CategoryRule(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
