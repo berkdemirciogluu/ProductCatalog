@@ -1,5 +1,7 @@
 ﻿using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.ValidationRules.FluentValidation.AuthValidation;
+using ProductCatalog.Core.Aspects.Autofac.Validation;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.Core.Utilities.Security.Hashing;
 using ProductCatalog.Core.Utilities.Security.JWT;
@@ -24,6 +26,8 @@ namespace ProductCatalog.Business.Services.Concrete
             _tokenHelper = tokenHelper;
         }
 
+        [ValidationAspect(typeof(UserForRegisterDtoValidator))]
+
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -41,6 +45,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
+        [ValidationAspect(typeof(UserForLoginDtoValidator))] 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.Email);

@@ -4,7 +4,9 @@ using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules;
 using ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules;
+using ProductCatalog.Business.ValidationRules.FluentValidation.ProductValidation;
 using ProductCatalog.Core.Aspects.Autofac.Caching;
+using ProductCatalog.Core.Aspects.Autofac.Validation;
 using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
@@ -30,6 +32,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         //[SecuredOperation("admin")]
         [CacheRemoveAspect("IProductService.Get")]
+        [ValidationAspect(typeof(AddProductDtoValidator))]
         public IResult Add(AddProductDto entity, string userId)
         {
             IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(entity.CategoryId));
@@ -74,14 +77,12 @@ namespace ProductCatalog.Business.Services.Concrete
         }
 
         [CacheRemoveAspect("IProductService.Get")]
+        [ValidationAspect(typeof(UpdateProductDtoValidator))]
         public IResult Update(UpdateProductDto product, int id, string userId)
         {
 
             var productToUpdate = _productRepository.GetById(id);
-            if (productToUpdate == null)
-            {
-                return new ErrorResult(Messages.ProductInvalid);
-            }
+
             var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id),_productRules.CheckProductOwner(productToUpdate, userId));
 
             if (result != null)
@@ -94,6 +95,7 @@ namespace ProductCatalog.Business.Services.Concrete
             productToUpdate.Price = product.Price != default ? product.Price : productToUpdate.Price;
             productToUpdate.Color = product.Color != default ? product.Color : productToUpdate.Color;
             productToUpdate.ProductName = product.ProductName != default ? product.ProductName : productToUpdate.ProductName;
+            productToUpdate.CategoryId = product.CategoryId != default ? product.CategoryId : productToUpdate.CategoryId;
 
             _productRepository.Update(productToUpdate);
             return new SuccessResult(Messages.ProductUpdated);

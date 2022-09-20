@@ -23,7 +23,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Context
             FluentConfiguration _config = Fluently.Configure()
                 .Database(PostgreSQLConfiguration.Standard
                 .ConnectionString(c => c.Is(conString)))
-                //Database(PostgreSQLConfiguration.Standard.ConnectionString(c => c.Host("localhost").Port(5432).Database("productcatalog").Username("postgres").Password("hilal71OKTAY11")))
                 .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(true, true)); //false,true
 

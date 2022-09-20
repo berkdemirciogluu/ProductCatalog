@@ -3,6 +3,8 @@ using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules;
 using ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules;
+using ProductCatalog.Business.ValidationRules.FluentValidation.OfferValidation;
+using ProductCatalog.Core.Aspects.Autofac.Validation;
 using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
@@ -48,6 +50,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.OfferDeleted);
         }
 
+        [ValidationAspect(typeof(MakeOfferDtoValidator))]
         public IResult Add(MakeOfferDto entity, string userId)
         {
 
@@ -68,6 +71,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         }
 
+        [ValidationAspect(typeof(UpdateOfferDtoValidator))]
         public IResult Update(UpdateOfferDto entity, string userId, int offerId)
         {
             var offer = _offerRepository.GetById(offerId);
