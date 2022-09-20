@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.Concrete;
 using ProductCatalog.Entities.DTOs.Product;
@@ -9,6 +10,7 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

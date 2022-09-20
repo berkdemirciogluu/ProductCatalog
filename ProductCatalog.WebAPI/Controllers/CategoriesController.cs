@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.Concrete;
 using ProductCatalog.Entities.DTOs.Category;

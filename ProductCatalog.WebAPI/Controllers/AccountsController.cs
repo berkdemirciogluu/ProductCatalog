@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Business.Services.Abstract;
 using System.Security.Claims;
@@ -7,6 +8,7 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;

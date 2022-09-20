@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Entities.DTOs.Offer;
 using System.Security.Claims;
@@ -8,6 +10,7 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SecuredOperation(" ")]
     public class OffersController : ControllerBase
     {
         IOfferService _offerService;
