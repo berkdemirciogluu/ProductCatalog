@@ -33,8 +33,9 @@ namespace ProductCatalog.WebAPI.Middlewares
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
-
             string message = "Something went wrong";
+
+            // Eğer validation hatasıysa, Badrequeste döndürdük.
             IEnumerable<ValidationFailure> errors;
             if (e.GetType() == typeof(ValidationException))
             {

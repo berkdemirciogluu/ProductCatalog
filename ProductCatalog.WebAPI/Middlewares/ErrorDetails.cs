@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ProductCatalog.WebAPI.Middlewares
 {
+
     public class ErrorDetails
     {
         public string Message { get; set; }
