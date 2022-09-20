@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProductCatalog.BackgroundWorkers\ProductCatalog.BackgroundWorkers.csproj" />
     <ProjectReference Include="..\ProductCatalog.Core\ProductCatalog.Core.csproj" />
     <ProjectReference Include="..\ProductCatalog.DataAccess\ProductCatalog.DataAccess.csproj" />
   </ItemGroup>

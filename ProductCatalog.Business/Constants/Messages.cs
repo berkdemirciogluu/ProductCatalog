@@ -52,5 +52,7 @@ namespace ProductCatalog.Business.Constants
         public static string NoUserProductOffer = "There is no any offer to your product.";
         public static string EmailRequired = "Email is required.";
         public static string PasswordRequired = "Password is required.";
+
+        public static string EmailAlreadyExists = "Email already exist";
     }
 }

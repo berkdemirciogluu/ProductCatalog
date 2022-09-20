@@ -1,4 +1,5 @@
-﻿using ProductCatalog.BackgroundWorkers.Services.Logger.Abstract;
+﻿using ProductCatalog.BackgroundWorkers.Entities;
+using ProductCatalog.BackgroundWorkers.Services.Logger.Abstract;
 using ProductCatalog.BackgroundWorkers.Services.Mail.RabbitMQ.Abstract;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace ProductCatalog.BackgroundWorkers.Services.Logger.Concrete
                 Subject = "User Gestures",
                 Body = message,
             };
-            Console.WriteLine("Emaile Loglandı");
+            Console.WriteLine("Logged to Email");
             _publisherService.Publish(email, RabbitMqQueue.EmailSenderQueue.ToString());
         }
     }

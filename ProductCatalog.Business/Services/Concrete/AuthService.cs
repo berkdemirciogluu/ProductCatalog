@@ -1,7 +1,11 @@
-﻿using ProductCatalog.Business.Constants;
+﻿using ProductCatalog.BackgroundWorkers.Entities;
+using ProductCatalog.BackgroundWorkers.Services.Mail.RabbitMQ.Abstract;
+using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
+using ProductCatalog.Business.ValidationRules.CustomValidation.AuthRules;
 using ProductCatalog.Business.ValidationRules.FluentValidation.AuthValidation;
 using ProductCatalog.Core.Aspects.Autofac.Validation;
+using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.Core.Utilities.Security.Hashing;
 using ProductCatalog.Core.Utilities.Security.JWT;
@@ -19,17 +23,28 @@ namespace ProductCatalog.Business.Services.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
+        private IAuthRule _authRule;
+        private IProducerService _producerService;
 
-        public AuthService(IUserService userService, ITokenHelper tokenHelper)
+        public AuthService(IUserService userService, ITokenHelper tokenHelper, IAuthRule authRule, IProducerService producerService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _authRule = authRule;
+            _producerService = producerService;
         }
 
         [ValidationAspect(typeof(UserForRegisterDtoValidator))]
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
+            var result = BusinessRules.Run(_authRule.CheckIfEmailExist(userForRegisterDto.Email));
+
+            if (result != null)
+            {
+                return new ErrorDataResult<User>(result.Message);
+            }
+
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var user = new User
@@ -58,6 +73,14 @@ namespace ProductCatalog.Business.Services.Concrete
             {
                 return new ErrorDataResult<User>(Messages.LoginWarning);
             }
+
+            var email = new EmailToSend
+            {
+                To = userForLoginDto.Email,
+                Subject = "Welcome",
+                Body = "We missed you",
+            };
+            _producerService.Publish(email, RabbitMqQueue.EmailSenderQueue.ToString());
 
             return new SuccessDataResult<User>(userToCheck, Messages.SuccesfulLogin);
         }

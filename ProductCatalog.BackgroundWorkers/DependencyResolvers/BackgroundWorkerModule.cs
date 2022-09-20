@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProductCatalog.BackgroundWorkers.Services.Logger.Abstract;
+using ProductCatalog.BackgroundWorkers.Services.Logger.Concrete;
 using ProductCatalog.BackgroundWorkers.Services.Mail.RabbitMQ.Abstract;
 using ProductCatalog.BackgroundWorkers.Services.Mail.RabbitMQ.Concrete;
 using System;
@@ -16,6 +18,7 @@ namespace ProductCatalog.BackgroundWorkers.DependencyResolvers
             services.AddScoped<ISmtpServerService, SmtpServerService>();
             services.AddSingleton<IProducerService, ProducerService>();
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
+            services.AddSingleton<ILoggerService, EmailLoggerService>();
         }
     }
 }
