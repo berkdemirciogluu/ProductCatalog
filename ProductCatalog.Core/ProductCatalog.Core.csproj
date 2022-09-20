@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="DataAccess\NHibernate\" />
     <Folder Include="Entities\Concrete\" />
+    <Folder Include="LogService\" />
   </ItemGroup>
 
   <ItemGroup>
