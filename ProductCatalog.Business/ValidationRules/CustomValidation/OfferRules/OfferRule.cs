@@ -30,7 +30,11 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules
 
         public IResult CheckOfferOwner(Offer offer, string userId)
         {
-            if (offer.UserId != Convert.ToInt32(userId))
+            if (offer == null)
+            {
+                return new ErrorResult(Messages.OfferInvalid);
+            }
+            else if (offer.UserId != Convert.ToInt32(userId))
             {
                 return new ErrorResult(Messages.NotOfferOwner);
             }
