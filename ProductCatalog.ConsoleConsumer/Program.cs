@@ -24,7 +24,7 @@ namespace ProductCatalog.ConsoleConsumer
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args).ConfigureServices((services) =>
             {
-                services.AddScoped<IConfiguration>(_ => new ConfigurationBuilder().AddJsonFile($"C:/Users/Barış/source/repos/UnluCoProductCatalog/WebAPI/appsettings.json").Build());
+                services.AddScoped<IConfiguration>(_ => new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build());
                 services.AddScoped<IProducerService, ProducerService>();
                 services.AddScoped<IRabbitMqService, RabbitMqService>();
                 services.AddScoped<ISmtpServerService, SmtpServerService>();
