@@ -12,7 +12,7 @@ using ProductCatalog.Entities.MappingProfiles;
 
 namespace ProductCatalog.Business.DependecyResolvers.Autofac
 {
-    public class AutofacBusinessModule : Module
+    public class BusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

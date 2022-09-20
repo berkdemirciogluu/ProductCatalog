@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using ProductCatalog.BackgroundWorkers.DependencyResolvers;
 using ProductCatalog.Core.DependencyResolvers;
 using ProductCatalog.Core.Extensions;
 using ProductCatalog.Core.Utilities.IoC;
@@ -54,16 +55,15 @@ namespace ProductCatalog.WebAPI
                new CoreModule()
             });
 
+            services.AddBackgroundWorkerServices();
+
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
             });
             services.AddSingleton(mapperConfig.CreateMapper());
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "PayCOre", Version = "v1" });
-            //});
+
 
             services.AddControllers();
         }
