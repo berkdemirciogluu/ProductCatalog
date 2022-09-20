@@ -6,19 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using ProductCatalog.Business.Services.Abstract;
-using ProductCatalog.Business.Services.Concrete;
 using ProductCatalog.Core.DependencyResolvers;
 using ProductCatalog.Core.Extensions;
 using ProductCatalog.Core.Utilities.IoC;
 using ProductCatalog.Core.Utilities.Security.Encryption;
 using ProductCatalog.Core.Utilities.Security.JWT;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
-using ProductCatalog.DataAccess.NHibernate.Repositories.Concrete;
 using ProductCatalog.Entities.MappingProfiles;
 using ProductCatalog.WebAPI.Extensions.Swagger;
-using System.Reflection;
+using ProductCatalog.WebAPI.Middlewares;
 
 namespace ProductCatalog.WebAPI
 {
@@ -82,6 +77,8 @@ namespace ProductCatalog.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PayCore"));
             }
+
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseHttpsRedirection();
 

@@ -4,6 +4,7 @@ using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules;
 using ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules;
+using ProductCatalog.Core.Aspects.Autofac.Caching;
 using ProductCatalog.Core.Utilities.Business;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
@@ -28,6 +29,7 @@ namespace ProductCatalog.Business.Services.Concrete
         }
 
         //[SecuredOperation("admin")]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(AddProductDto entity, string userId)
         {
             IResult result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(entity.CategoryId));
@@ -47,6 +49,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Delete(int id)
         {
             var result = BusinessRules.Run(_productRules.CheckIfProductInvalid(id));
@@ -62,6 +65,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.ProductDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<GetProductDto>> GetAll()
         {
             var products = _productRepository.GetProducts();
@@ -69,6 +73,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessDataResult<List<GetProductDto>>(result);
         }
 
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(UpdateProductDto product, int id, string userId)
         {
 
@@ -93,7 +98,8 @@ namespace ProductCatalog.Business.Services.Concrete
             _productRepository.Update(productToUpdate);
             return new SuccessResult(Messages.ProductUpdated);
         }
-        
+
+        [CacheAspect]
         public IDataResult<List<GetProductDto>> GetUserProducts(string userId)
         {
             if (string.IsNullOrWhiteSpace(userId))
@@ -103,6 +109,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessDataResult<List<GetProductDto>>(_productRepository.GetUserProducts(userId),Messages.ProductsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<GetProductDto>> GetProductsByCategoryId(int categoryId)
         {
             var result = BusinessRules.Run(_categoryRules.CheckIfCategoryInvalid(categoryId));
