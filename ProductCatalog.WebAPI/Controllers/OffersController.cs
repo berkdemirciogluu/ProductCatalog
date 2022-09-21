@@ -58,7 +58,8 @@ namespace ProductCatalog.WebAPI.Controllers
         [HttpPatch("ApproveOffer/{id}")]
         public IActionResult AproveOffer(int id)
         {
-            var result = _offerService.ApproveOffer(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _offerService.ApproveOffer(id, userId);
             if (result.Success)
             {
                 return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
@@ -69,6 +70,7 @@ namespace ProductCatalog.WebAPI.Controllers
         [HttpDelete("WithdrawOffer/{id}")]
         public IActionResult WithdrawOffer(int id)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _offerService.WithdrawTheOffer(id);
             if (result.Success)
             {

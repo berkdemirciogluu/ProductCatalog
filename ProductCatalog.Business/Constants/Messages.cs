@@ -56,5 +56,9 @@ namespace ProductCatalog.Business.Constants
         public static string EmailAlreadyExists = "Email already exist";
 
         public static string OwnProduct = "This is your own product. You cannot make an offer.";
+
+        public static string NotRelevantOffer = "This offer is not related with your product.";
+
+        public static string OfferAlreadyApproved = "Offer already approved";
     }
 }

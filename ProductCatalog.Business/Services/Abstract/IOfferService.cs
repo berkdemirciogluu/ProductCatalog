@@ -12,7 +12,7 @@ namespace ProductCatalog.Business.Services.Abstract
     {
         IResult Add(MakeOfferDto entity, string userId);
         IResult Delete(int offerId);
-        IResult ApproveOffer(int offerId);
+        IResult ApproveOffer(int offerId, string userId);
         IResult Update(UpdateOfferDto entity, string userId, int id);
 
         IResult WithdrawTheOffer(int offerId);

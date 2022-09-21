@@ -97,40 +97,41 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.OfferUpdated);
         }
 
-        public IResult ApproveOffer(int offerId)
+        public IResult ApproveOffer(int offerId, string userId)
         {
-            
-            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId));
-
             var offer = _offerRepository.GetById(offerId);
+            var products = _productRepository.GetUserProducts(userId);
+
+            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId),
+                _offerRules.CheckReceiveOwner(offer,userId),
+                _offerRules.CheckIfAlreadyAprroved(offerId));
 
             if (result != null)
             {
                 return new ErrorResult(result.Message);
             }
 
-            if (offer.IsApproved)
-            {
-                offer.IsSold = true;
-            }
-            else
-            {
-                offer.IsSold = false;
-            }
+            offer.IsApproved = true;
+            offer.IsSold = true;
+            _offerRepository.Update(offer);
 
+            var theProduct = products.SingleOrDefault(p => p.Id == offer.ProductId);
+            theProduct.IsOfferable = false;            
+            var addedProduct = _mapper.Map<Product>(theProduct);
+            _productRepository.Update(addedProduct);
             return new SuccessResult(Messages.OfferApproved);
         }
 
-        public IResult WithdrawTheOffer(int offerId)
+        public IResult WithdrawTheOffer(int offerId,string userId)
         {
-            var result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId));
+            var offer = _offerRepository.GetById(offerId);
+            var result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId),
+                                            _offerRules.CheckOfferOwner(offer,userId));
 
             if (result != null)
             {
                 return new ErrorResult(result.Message);
             }
-
-            var offer = _offerRepository.GetById(offerId);
 
             if (offer.IsApproved)
             {

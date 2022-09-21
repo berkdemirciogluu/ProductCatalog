@@ -12,5 +12,8 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules
     {
         IResult CheckIfOfferInvalid(int id);
         IResult CheckOfferOwner(Offer offer, string userId);
+        IResult CheckReceiveOwner(Offer offer, string userId);
+
+        IResult CheckIfAlreadyAprroved(int offerId);
     }
 }
