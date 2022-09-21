@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
+using ProductCatalog.BackgroundWorkers.Services.Logger.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -10,11 +11,12 @@ namespace ProductCatalog.WebAPI.Middlewares
 {
     public class ExceptionMiddleware
     {
-        private RequestDelegate _next;
-
-        public ExceptionMiddleware(RequestDelegate next)
+        private readonly RequestDelegate _next;
+        private readonly ILoggerService _loggerService;
+        public ExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
+            _loggerService = loggerService;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -34,6 +36,7 @@ namespace ProductCatalog.WebAPI.Middlewares
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
             string message = "Something went wrong";
+            _loggerService.Log(message);
 
             // Eğer validation hatasıysa, Badrequeste döndürdük.
             IEnumerable<ValidationFailure> errors;
