@@ -8,7 +8,6 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -30,7 +29,7 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
 
-        [HttpGet("GetUserOfferedProducts")]
+        [HttpGet("GetUserProductOffers")]
         public IActionResult GetUserOfferedProducts()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

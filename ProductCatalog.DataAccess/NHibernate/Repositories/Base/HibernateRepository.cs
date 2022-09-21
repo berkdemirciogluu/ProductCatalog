@@ -2,7 +2,6 @@
 using ProductCatalog.Core.Entities;
 using ProductCatalog.DataAccess.NHibernate.Context;
 using ProductCatalog.Entities.Concrete;
-using Serilog;
 using System.Linq.Expressions;
 
 namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
@@ -26,7 +25,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("HibernateRepository.Add", ex.Message);
+
                         if (!_transaction.WasCommitted)
                         {
                             _transaction.Rollback();
@@ -52,7 +51,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("HibernateRepository.Delete", ex.Message);
+
                         if (!_transaction.WasCommitted)
                         {
                             _transaction.Rollback();
@@ -103,7 +102,7 @@ namespace ProductCatalog.DataAccess.NHibernate.Repositories.Base
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("HibernateRepository.Update", ex.Message);
+
                         if (!_transaction.WasCommitted)
                         {
                             _transaction.Rollback();

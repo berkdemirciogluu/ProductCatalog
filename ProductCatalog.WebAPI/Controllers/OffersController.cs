@@ -10,7 +10,6 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [SecuredOperation(" ")]
     public class OffersController : ControllerBase
     {
         IOfferService _offerService;

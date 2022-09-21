@@ -12,7 +12,6 @@ using ProductCatalog.Core.Extensions;
 using ProductCatalog.Core.Utilities.IoC;
 using ProductCatalog.Core.Utilities.Security.Encryption;
 using ProductCatalog.Core.Utilities.Security.JWT;
-using ProductCatalog.DataAccess.DependencyResolvers;
 using ProductCatalog.Entities.MappingProfiles;
 using ProductCatalog.WebAPI.Extensions.Swagger;
 using ProductCatalog.WebAPI.Middlewares;
@@ -52,17 +51,19 @@ namespace ProductCatalog.WebAPI
 
             services.AddCustomizeSwagger();
 
-            services.AddDependencyResolvers(new ICoreModule[] {new CoreModule()});
+            services.AddDependencyResolvers(new ICoreModule[] {
+               new CoreModule()
+            });
 
             services.AddBackgroundWorkerServices();
-
-            services.AddDataAccessServices();
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
             });
             services.AddSingleton(mapperConfig.CreateMapper());
+
+
 
             services.AddControllers();
         }

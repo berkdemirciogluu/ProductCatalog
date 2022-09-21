@@ -22,12 +22,9 @@ namespace ProductCatalog.Business.Services.Base
             _hibernateRepository = hibernateRepository;
         }
 
-        public virtual IDataResult<TDto> Add(TDto dto)
+        public IDataResult<TDto> Add(TDto dto)
         {
-
-            //var tempEntity = Mapper.Map<Dto, Entity>(insertResource);
-            //_hibernateRepository.Add(tempEntity);
-            return new SuccessDataResult<TDto>(Messages.CategoryAdded);
+            throw new NotImplementedException();
         }
 
         public IDataResult<TDto> Delete(int id)

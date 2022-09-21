@@ -45,7 +45,6 @@ namespace ProductCatalog.Business.Services.Concrete
             var product = _mapper.Map<Product>(entity);
 
             product.UserId = Convert.ToInt32(userId);
-            product.OfferId = default;
             product.IsOfferable = true;
             product.IsSold = false;
             _productRepository.Add(product);
@@ -162,6 +161,7 @@ namespace ProductCatalog.Business.Services.Concrete
         {
             return new SuccessDataResult<List<GetProductOffersDto>>(_productRepository.GetProductsForOffer(), Messages.ProductsListed);
         }
+
 
     }
 }

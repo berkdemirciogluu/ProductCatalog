@@ -46,7 +46,7 @@ namespace ProductCatalog.Business.Constants
         public static string NotOfferOwner = "You do not have this offer record. Please check offer id.";
         public static string OffersListed = "Offers are listed.";
         public static string ProductSold = "Product is sold.";
-        public static string OfferCannotWitdrawn = "Offer has been already approved. You cannot withdraw your off back.";
+        public static string OfferCannotWitdrawn = "Offer has been already approved. You cannot withdraw your offer back.";
         public static string OfferWithdrawn = "Offer is withdrawn.";
         public static string NoUserOffer = "You do not have any offer record";
         public static string NoUserProductOffer = "There is no any offer to your product.";
@@ -54,5 +54,7 @@ namespace ProductCatalog.Business.Constants
         public static string PasswordRequired = "Password is required.";
 
         public static string EmailAlreadyExists = "Email already exist";
+
+        public static string OwnProduct = "This is your own product. You cannot make an offer.";
     }
 }

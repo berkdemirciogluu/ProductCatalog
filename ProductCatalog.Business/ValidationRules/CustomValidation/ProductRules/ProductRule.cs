@@ -43,7 +43,7 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.ProductRules
             var product = _productRepository.GetById(productId);
             if (product.UserId == Convert.ToInt32(userId))
             {
-                return new ErrorResult(Messages.NotProductOwner);
+                return new ErrorResult(Messages.OwnProduct);
             }
             return new SuccessResult();
         }

@@ -54,9 +54,15 @@ namespace ProductCatalog.Business.Services.Concrete
         public IResult Add(MakeOfferDto entity, string userId)
         {
 
-            BusinessRules.Run(_productRules.CheckIfProductInvalid(entity.ProductId),_productRules.CheckIfOwnProduct(entity.ProductId, userId));
+            IResult result = BusinessRules.Run(_productRules.CheckIfProductInvalid(entity.ProductId),_productRules.CheckIfOwnProduct(entity.ProductId, userId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
 
             var product = _productRepository.GetById(entity.ProductId);
+
             if (!product.IsOfferable)
             {
                 return new ErrorResult(Messages.ProductNotSaled);
