@@ -89,12 +89,12 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("SellProduct")]
-        public IActionResult SellProduct(SellProductDto sellproduct)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _productService.SellProduct(sellproduct, userId);
-            return Ok();
-        }
+        //[HttpPut("SellProduct")]
+        //public IActionResult SellProduct(SellProductDto sellproduct)
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    _productService.SellProduct(sellproduct, userId);
+        //    return Ok();
+        //}
     }
 }

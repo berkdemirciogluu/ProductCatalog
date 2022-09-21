@@ -65,5 +65,16 @@ namespace ProductCatalog.WebAPI.Controllers
             }
             return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
         }
+
+        [HttpDelete("WithdrawOffer/{id}")]
+        public IActionResult WithdrawOffer(int id)
+        {
+            var result = _offerService.WithdrawTheOffer(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

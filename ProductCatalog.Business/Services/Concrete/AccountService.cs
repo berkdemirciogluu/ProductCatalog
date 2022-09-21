@@ -14,16 +14,16 @@ namespace ProductCatalog.Business.Services.Concrete
 {
     public class AccountService : IAccountService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IOfferRepository _offerRepository;
 
-        public AccountService(IOfferRepository offerRepository,IUnitOfWork unitOfWork)
+        public AccountService(IOfferRepository offerRepository)
         {
-            _unitOfWork = unitOfWork;
+            _offerRepository = offerRepository;
         }
 
         public IDataResult<List<GetUserOfferDto>> GetUserOfferedProducts(string userId)
         {
-            var result = _unitOfWork.Offer.GetUserOfferedProducts(userId);
+            var result = _offerRepository.GetUserOfferedProducts(userId);
 
             if (result.Count == 0)
             {

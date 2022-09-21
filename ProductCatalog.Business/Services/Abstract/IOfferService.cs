@@ -15,6 +15,6 @@ namespace ProductCatalog.Business.Services.Abstract
         IResult ApproveOffer(int offerId);
         IResult Update(UpdateOfferDto entity, string userId, int id);
 
-        IResult WithDrawTheOffer(int offerId);
+        IResult WithdrawTheOffer(int offerId);
     }
 }

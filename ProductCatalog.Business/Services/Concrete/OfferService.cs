@@ -121,7 +121,7 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.OfferApproved);
         }
 
-        public IResult WithDrawTheOffer(int offerId)
+        public IResult WithdrawTheOffer(int offerId)
         {
             var result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId));
 
