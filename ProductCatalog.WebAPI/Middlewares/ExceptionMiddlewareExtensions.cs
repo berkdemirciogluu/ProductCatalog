@@ -2,7 +2,7 @@
 
 namespace ProductCatalog.WebAPI.Middlewares
 {
-    // Farklı farklı middleware yapıları eklenirse sisteme direk buradan eklensin diye oluşturuldu.
+    //Farklı farklı middleware yapıları eklenirse sisteme direk buradan eklensin diye oluşturuldu.
     public static class ExceptionMiddlewareExtensions
     {
         public static void ConfigureCustomExceptionMiddleware(this IApplicationBuilder app)
@@ -10,4 +10,5 @@ namespace ProductCatalog.WebAPI.Middlewares
             app.UseMiddleware<ExceptionMiddleware>();
         }
     }
+
 }

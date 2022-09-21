@@ -78,8 +78,6 @@ namespace ProductCatalog.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PayCore"));
             }
 
-            app.ConfigureCustomExceptionMiddleware();
-
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -87,6 +85,8 @@ namespace ProductCatalog.WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
