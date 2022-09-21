@@ -100,7 +100,7 @@ namespace ProductCatalog.Business.Services.Concrete
         public IResult ApproveOffer(int offerId, string userId)
         {
             var offer = _offerRepository.GetById(offerId);
-            var products = _productRepository.GetUserProducts(userId);
+            var products = _offerRepository.GetUserOfferedProducts(userId);
 
             IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId),
                 _offerRules.CheckReceiveOwner(offer,userId),
@@ -115,9 +115,9 @@ namespace ProductCatalog.Business.Services.Concrete
             offer.IsSold = true;
             _offerRepository.Update(offer);
 
-            var theProduct = products.SingleOrDefault(p => p.Id == offer.ProductId);
-            theProduct.IsOfferable = false;            
+            var theProduct = products.SingleOrDefault(p => p.Id == offer.ProductId);                      
             var addedProduct = _mapper.Map<Product>(theProduct);
+            addedProduct.IsOfferable = false;
             _productRepository.Update(addedProduct);
             return new SuccessResult(Messages.OfferApproved);
         }
@@ -142,6 +142,25 @@ namespace ProductCatalog.Business.Services.Concrete
             _offerRepository.Update(offer);
 
             return new SuccessResult(Messages.OfferWithdrawn);
+        }
+
+        public IResult DeclineOffer(int offerId, string userId)
+        {
+            var offer = _offerRepository.GetById(offerId);
+            var products = _offerRepository.GetUserOfferedProducts(userId);
+
+            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId),
+                _offerRules.CheckReceiveOwner(offer, userId));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            offer.IsDeleted = true;
+            _offerRepository.Update(offer);
+
+            return new SuccessResult(Messages.OfferApproved);
         }
     }
 }

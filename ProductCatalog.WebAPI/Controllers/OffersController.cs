@@ -67,6 +67,18 @@ namespace ProductCatalog.WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpPatch("DeclineOffer/{id}")]
+        public IActionResult DeclineOffer(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _offerService.DeclineOffer(id, userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpDelete("WithdrawOffer/{id}")]
         public IActionResult WithdrawOffer(int id)
         {
