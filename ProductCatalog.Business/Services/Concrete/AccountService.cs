@@ -2,6 +2,7 @@
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
+using ProductCatalog.DataAccess.UnitOfWorks;
 using ProductCatalog.Entities.DTOs.Offer;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace ProductCatalog.Business.Services.Concrete
 {
     public class AccountService : IAccountService
     {
-        private readonly IOfferRepository _offerRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountService(IOfferRepository offerRepository)
+        public AccountService(IOfferRepository offerRepository,IUnitOfWork unitOfWork)
         {
-            _offerRepository = offerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<GetUserOfferDto>> GetUserOfferedProducts(string userId)
         {
-            var result = _offerRepository.GetUserOfferedProducts(userId);
+            var result = _unitOfWork.Offer.GetUserOfferedProducts(userId);
 
             if (result.Count == 0)
             {

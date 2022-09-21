@@ -10,7 +10,7 @@ namespace ProductCatalog.UnitTests.CategoryTests.ArtificialData
 {
     public static class CategoryArtficialData
     {
-        public static IEnumerable<Category> GetCategoriesData()
+        public static List<Category> GetCategoriesData()
         {
             var result = new List<Category>
             {
@@ -18,7 +18,7 @@ namespace ProductCatalog.UnitTests.CategoryTests.ArtificialData
                 new Category {Id = 2, IsDeleted = false, CategoryName = "Test2"},
                 new Category {Id = 3, IsDeleted = false, CategoryName = "Test3"},
 
-            }.AsQueryable();
+            }.ToList();
 
             return result;
         }
