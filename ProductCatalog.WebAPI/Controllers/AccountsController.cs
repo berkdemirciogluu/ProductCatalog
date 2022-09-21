@@ -24,9 +24,9 @@ namespace ProductCatalog.WebAPI.Controllers
             var result = _accountService.GetUserOffers(userId);
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result); 
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
         [HttpGet("GetUserProductOffers")]
@@ -36,9 +36,9 @@ namespace ProductCatalog.WebAPI.Controllers
             var result = _accountService.GetUserOfferedProducts(userId);
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result); 
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
     }

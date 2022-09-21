@@ -21,45 +21,45 @@ namespace ProductCatalog.WebAPI.Controllers
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _categoryService.GetAll(); //The method to obtain all the items in the list.
+            var result = _categoryService.GetAll(); 
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result);
             }
             return BadRequest(result);
         }
 
         [HttpPost("Add")]
-        public IActionResult Add([FromBody] CommandCategoryDto entity) //This method of adding the instance with the parameters taken from body to the list.
+        public IActionResult Add([FromBody] CommandCategoryDto entity) 
         {
             var result = _categoryService.Add(entity);
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result);
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
         [HttpPut("Update/{id}")]
-        public IActionResult Update([FromBody] CommandCategoryDto category, int id) //This method of updating the instance according to the parameters taken from body to the list.
+        public IActionResult Update([FromBody] CommandCategoryDto category, int id) 
         {
             var result = (_categoryService.Update(category, id));
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result); 
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _categoryService.Delete(id); //This method of deleting the instance according to id.
+            var result = _categoryService.Delete(id); 
             if (result.Success)
             {
-                return Ok(result);//If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result);
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
     }
 }

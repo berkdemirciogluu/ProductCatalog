@@ -13,7 +13,6 @@ namespace ProductCatalog.Business.Services.Abstract
         IDataResult<List<GetProductDto>> GetUserProducts(string userId);
         IDataResult<List<GetProductDto>> GetProductsByCategoryId(int categoryId);
         IResult UpdateIsOfferable(int id, string userId);
-        IResult SellProduct(SellProductDto entity, string userId);
         IDataResult<List<GetProductOffersDto>> GetProductsForOffer();
 
     }

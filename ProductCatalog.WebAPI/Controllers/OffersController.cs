@@ -44,15 +44,15 @@ namespace ProductCatalog.WebAPI.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public IActionResult Update([FromBody] UpdateOfferDto offer, int id) //This method of updating the instance according to the parameters taken from body to the list.
+        public IActionResult Update([FromBody] UpdateOfferDto offer, int id) 
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = (_offerService.Update(offer, userId, id));
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result);
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
         [HttpPatch("ApproveOffer/{id}")]
@@ -62,16 +62,16 @@ namespace ProductCatalog.WebAPI.Controllers
             var result = _offerService.ApproveOffer(id, userId);
             if (result.Success)
             {
-                return Ok(result); //If the process was successful, it will return 200 status code with a relevant message.
+                return Ok(result); 
             }
-            return BadRequest(result);//If the process was fail, it will return 400 status code with a relevant message.
+            return BadRequest(result);
         }
 
         [HttpDelete("WithdrawOffer/{id}")]
         public IActionResult WithdrawOffer(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = _offerService.WithdrawTheOffer(id);
+            var result = _offerService.WithdrawTheOffer(id,userId);
             if (result.Success)
             {
                 return Ok(result);
