@@ -45,14 +45,14 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules
 
         public IResult CheckReceiveOwner(Offer offer, string userId)
         {
-            var products = _offerRepository.GetUserOfferedProducts(userId);
+            var offers = _offerRepository.GetUserOfferedProducts(userId);
 
             if (offer == null)
             {
                 return new ErrorResult(Messages.OfferInvalid);
             }
 
-            var theProduct = products.SingleOrDefault(products => products.Id == offer.ProductId);
+            var theProduct = offers.SingleOrDefault(offers => offers.Product.Id == offer.ProductId);
             if (theProduct == null)
             {
                 return new ErrorResult(Messages.NotRelevantOffer);
