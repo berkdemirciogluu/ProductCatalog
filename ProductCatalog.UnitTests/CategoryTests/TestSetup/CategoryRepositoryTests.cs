@@ -52,7 +52,7 @@ namespace ProductCatalog.UnitTests.CategoryTests.TestSetup
 
             var exception =
                 Record.Exception(() => repository.Update(category));
-            Assert.Null(exception);
+            Assert.NotNull(exception);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace ProductCatalog.UnitTests.CategoryTests.TestSetup
 
             var exception =
                 Record.Exception(() => repository.Delete(category.Id));
-            Assert.Null(exception);
+            Assert.NotNull(exception);
         }
 
 

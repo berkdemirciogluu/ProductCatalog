@@ -1,5 +1,5 @@
 ﻿using NHibernate;
-using NHibernate.Bytecode;
+using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
@@ -24,7 +24,7 @@ namespace ProductCatalog.UnitTests.InMemoryDatabase
 					.SetProperty(Environment.Dialect, typeof(SQLiteDialect).AssemblyQualifiedName)
 					.SetProperty(Environment.ConnectionDriver, typeof(SQLite20Driver).AssemblyQualifiedName)
 					.SetProperty(Environment.ConnectionString, "data source=:memory:")
-					.SetProperty(Environment.ProxyFactoryFactoryClass, typeof(IProxyFactoryFactory).AssemblyQualifiedName)
+					.SetProperty(Environment.ProxyFactoryFactoryClass, typeof(ProxyFactoryFactory).AssemblyQualifiedName)
 					.AddAssembly(assemblyContainingMapping);
 
 				SessionFactory = Configuration.BuildSessionFactory();
@@ -32,7 +32,7 @@ namespace ProductCatalog.UnitTests.InMemoryDatabase
 
 			session = SessionFactory.OpenSession();
 
-			new SchemaExport(Configuration).Execute(true, true, false, session.Connection, Console.Out);
+			new SchemaExport(Configuration).Execute(true, false, false, session.Connection, Console.Out);
 		}
 
 		public void Dispose()

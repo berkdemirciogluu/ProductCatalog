@@ -1,26 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="NHibernate" Version="5.3.13" />
-    <PackageReference Include="Npgsql" Version="6.0.7" />
-    <PackageReference Include="runtime.any.System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="11.0.1" />
+		<PackageReference Include="FluentNHibernate" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="NHibernate" Version="5.3.13" />
+		<PackageReference Include="Npgsql" Version="6.0.7" />
+		<PackageReference Include="SQLite" Version="3.13.0" />
+		<PackageReference Include="System.Data.SQLite" Version="1.0.116" />
+		<PackageReference Include="runtime.any.System.IO" Version="4.3.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.116" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ProductCatalog.Core\ProductCatalog.Core.csproj" />
-    <ProjectReference Include="..\ProductCatalog.Entities\ProductCatalog.Entities.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ProductCatalog.Core\ProductCatalog.Core.csproj" />
+		<ProjectReference Include="..\ProductCatalog.Entities\ProductCatalog.Entities.csproj" />
+	</ItemGroup>
 
 </Project>

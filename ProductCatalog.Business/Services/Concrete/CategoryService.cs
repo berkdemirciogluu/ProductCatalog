@@ -4,6 +4,7 @@ using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.CustomValidation.CategoryRules;
 using ProductCatalog.Business.ValidationRules.FluentValidation.CategoryValidation;
+using ProductCatalog.Core.Aspects.Autofac.Caching;
 using ProductCatalog.Core.Aspects.Autofac.Validation;
 using ProductCatalog.Core.CrossCuttingConcerns.Validation;
 using ProductCatalog.Core.Utilities.Business;
@@ -26,6 +27,7 @@ namespace ProductCatalog.Business.Services.Concrete
             _categoryRules = categoryRules;
         }
 
+        
         [ValidationAspect(typeof(CommandCategoryDtoValidator))]
         //[SecuredOperation("category.add,admin")]
         public IResult Add(CommandCategoryDto category)
@@ -61,6 +63,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
         }
 
+        [CacheAspect]
         public IDataResult<List<CategoryDto>> GetAll()
         {
             var categories = _categoryRepository.GetAll();
@@ -68,7 +71,7 @@ namespace ProductCatalog.Business.Services.Concrete
 
             return new SuccessDataResult<List<CategoryDto>>(result, Messages.CategoryListed);
         }
-
+        [CacheRemoveAspect("IProductService.Get")]
         [ValidationAspect(typeof(CommandCategoryDtoValidator))]
         public IResult Update(CommandCategoryDto category, int id)
         {
