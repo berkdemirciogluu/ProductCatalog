@@ -117,9 +117,11 @@ namespace ProductCatalog.Business.Services.Concrete
             offer.IsSold = true;
             _offerRepository.Update(offer);
 
-            var theProduct = products.SingleOrDefault(p => p.Id == offer.ProductId);                      
+            var theProduct = products.SingleOrDefault(p => p.Product.Id == offer.ProductId);                      
             var addedProduct = _mapper.Map<Product>(theProduct);
             addedProduct.IsOfferable = false;
+            addedProduct.IsSold = true;
+
             _productRepository.Update(addedProduct);
             return new SuccessResult(Messages.OfferApproved);
         }
@@ -149,7 +151,6 @@ namespace ProductCatalog.Business.Services.Concrete
         public IResult DeclineOffer(int offerId, string userId)
         {
             var offer = _offerRepository.GetById(offerId);
-            var products = _offerRepository.GetUserOfferedProducts(userId);
 
             IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId),
                 _offerRules.CheckReceiveOwner(offer, userId));
