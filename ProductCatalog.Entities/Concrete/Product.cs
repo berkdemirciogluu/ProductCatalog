@@ -12,8 +12,6 @@
         public virtual string Brand { get; set; }
         public virtual double Price { get; set; }
 
-        //---------
-        //public virtual Category Category { get; set; }
 
     }
 }

@@ -6,8 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace ProductCatalog.Core.CrossCuttingConcerns.Caching.Microsoft
 {
-    //Microsoftta bu kodların hali hazırda olmasınakarşılık bu class altında bu kodlar  toplandı. İlerleyen zamanlarda farklı bir teknoloji kullanılması ihtimaline karşılık ayrı bir classda yazıldı.
-    //Var olan sistemi kendi sistemimize uyarlamak için. Buna Adapter pattern uygulandı.
+    //Although these codes are already in Microsoft, these codes were collected under these class.
+    //In the future, it was written in a separate class in case of using a different technology.
+    //To adapt the existing system to our own system. Adapter pattern was applied to this.
     public class MemoryCacheManager : ICacheManager
     {
         private readonly IMemoryCache _memoryCache;
@@ -17,13 +18,13 @@ namespace ProductCatalog.Core.CrossCuttingConcerns.Caching.Microsoft
             _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>();
         }
 
-        //Cache oluştuma methodu
+        
         public void Add(string key, object value, int duration)
         {
             _memoryCache.Set(key,value,TimeSpan.FromSeconds(duration));
         }
 
-        //Memory Cacheden getleme
+        /
         public T Get<T>(string key)
         {
             return _memoryCache.Get<T>(key);
@@ -34,10 +35,10 @@ namespace ProductCatalog.Core.CrossCuttingConcerns.Caching.Microsoft
             return _memoryCache.Get(key);
         }
 
-        //Bellekte cache in olup olmadığını döndürür
+        //Returns if there is cache in memory
         public bool IsAdd(string key)
         {
-            return _memoryCache.TryGetValue(key,out _); //Bellekte cache olup olmadığına bakar. Değer döndürmek istemediğimiz için bu şekide kullandık.
+            return _memoryCache.TryGetValue(key,out _); //It looks at the memory if there is cache. We used it in this way because we don't want to return value.
         }
 
         public void Remove(string key)
@@ -45,7 +46,7 @@ namespace ProductCatalog.Core.CrossCuttingConcerns.Caching.Microsoft
             _memoryCache?.Remove(key);
         }
 
-        //Belirli bir patterne göre çalışma anında cache i uçurmak için yazıldı. 
+        //According to a particular pattern, it was written to remove cache at the time of the study. 
         public void RemoveByPattern(string pattern)
         {
             var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);

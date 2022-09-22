@@ -30,8 +30,6 @@ namespace ProductCatalog.Entities.MappingProfiles
             CreateMap<UpdateOfferDto, Offer>();
             
 
-            //CreateMap<Product, GetProductDto>().ForMember(dst => dst.CategoryInfo, src => src.MapFrom(src => new Category() { CategoryName = src.CategoryInfo.CategoryName }));
-
         }
     }
 }

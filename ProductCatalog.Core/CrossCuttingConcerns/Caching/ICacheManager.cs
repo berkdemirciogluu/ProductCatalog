@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Core.CrossCuttingConcerns.Caching
 {
-    // Farklı cache alternatifleri için tasarlandı. Herhangi bir teknolojiden bağımsız olarak.
+    // Designed for different Cache alternatives. Regardless of any technology.
     public interface ICacheManager
     {
         T Get<T>(string key); 
