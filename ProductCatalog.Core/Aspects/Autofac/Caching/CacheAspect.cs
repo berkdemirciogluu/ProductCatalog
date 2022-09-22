@@ -22,8 +22,8 @@ namespace ProductCatalog.Core.Aspects.Autofac.Caching
             _cacheManager = ServiceTool.ServiceProvider.GetService<ICacheManager>();
         }
 
-        // Tetiklenen methodu Namespace'i ismi ve parametrelerine göre "key" oluşturuyor.
-        // Eğer key daha önce oluşturulmuşsa onu kullanır. Yoksa verileri veri tabanından cache aktarır. 
+        // The triggered method forms "key" according to the name and parameters of the namespace.
+        // If the key has been created before, it uses it. Otherwise, the data transfer from the database to cache. 
         public override void Intercept(IInvocation invocation)
         {
             var methodName = string.Format($"{invocation.Method.ReflectedType.FullName}.{invocation.Method.Name}");

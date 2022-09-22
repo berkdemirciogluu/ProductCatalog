@@ -24,27 +24,48 @@ namespace ProductCatalog.Business.Services.Base
 
         public IDataResult<TDto> Add(TDto dto)
         {
-            throw new NotImplementedException();
+            var tempEntity = _mapper.Map<TDto, TEntity>(dto);
+            _hibernateRepository.Add(tempEntity);
+            return new SuccessDataResult<TDto>(_mapper.Map<TEntity, TDto>(tempEntity));
         }
 
         public IDataResult<TDto> Delete(int id)
         {
-            throw new NotImplementedException();
+            var tempEntity = _hibernateRepository.GetById(id);
+            if (tempEntity is null)
+            {
+                return new ErrorDataResult<TDto>("Record Not Found");
+            }
+            _hibernateRepository.Delete(id);
+            return new SuccessDataResult<TDto>(_mapper.Map<TEntity, TDto>(tempEntity));
         }
 
         public IDataResult<List<TDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var tempEntity = _hibernateRepository.GetAll();
+            var result = _mapper.Map<List<TEntity>, List<TDto>>(tempEntity);
+            return new SuccessDataResult<List<TDto>>(result);
         }
 
         public IDataResult<TDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            var tempEntity = _hibernateRepository.GetById(id);
+            var result = _mapper.Map<TEntity, TDto>(tempEntity);
+            return new SuccessDataResult<TDto>(result);
         }
 
         public IDataResult<TDto> Update(int id, TDto dto)
         {
-            throw new NotImplementedException();
+            var tempEntity = _hibernateRepository.GetById(id);
+            if (tempEntity is null)
+            {
+                return new SuccessDataResult<TDto>("Record Not Found");
+            }
+            var entity = _mapper.Map<TDto, TEntity>(dto, tempEntity);
+            _hibernateRepository.Update(entity);
+            var resource = _mapper.Map<TEntity, TDto>(entity);
+            return new SuccessDataResult<TDto>(resource);
+
         }
     }
 }

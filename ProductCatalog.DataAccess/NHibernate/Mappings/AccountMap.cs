@@ -18,13 +18,6 @@ namespace ProductCatalog.DataAccess.NHibernate.Mappings
             Map(b => b.OfferId);
             Map(b => b.IsDeleted);
 
-            //References(b => b.User);
-
-            //References(b => b.Product);
-
-            //References(b => b.Offer);
-
-
         }
     }
 }
