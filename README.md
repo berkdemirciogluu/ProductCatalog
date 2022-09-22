@@ -58,7 +58,7 @@ This section will walk you through each step of the installation process require
 <img src="https://github.com/berkdemirciogluu/ProductCatalog/blob/master/images/9.png" width="600" />
 </p>
 
-- For background jobs, RabbitMQ and Serilog are used.
+- For background mail jobs, RabbitMQ is used.
 
 ## API Endpoints
 
