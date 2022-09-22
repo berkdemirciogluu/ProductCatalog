@@ -85,3 +85,8 @@ This section will walk you through each step of the installation process require
 |**Products/GetUserProducts/{id}** | Users can get their own products with the help of this endpoint.
 |**Products/GetProductsById/{id}** | Users can get products associated with given category id with the help of this endpoint.
 
+## Swagger
+<p align="center">
+<img src="https://github.com/berkdemirciogluu/ProductCatalog/blob/master/images/10.png" />
+</p>
+
