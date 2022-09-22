@@ -24,7 +24,6 @@ namespace ProductCatalog.Core.CrossCuttingConcerns.Caching.Microsoft
             _memoryCache.Set(key,value,TimeSpan.FromSeconds(duration));
         }
 
-        /
         public T Get<T>(string key)
         {
             return _memoryCache.Get<T>(key);
