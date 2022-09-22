@@ -52,7 +52,7 @@ namespace ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules
                 return new ErrorResult(Messages.OfferInvalid);
             }
 
-            var theProduct = offers.SingleOrDefault(offers => offers.Product.Id == offer.ProductId);
+            var theProduct = offers.Where(offers => offers.Product.Id == offer.ProductId).ToList();
             if (theProduct == null)
             {
                 return new ErrorResult(Messages.NotRelevantOffer);

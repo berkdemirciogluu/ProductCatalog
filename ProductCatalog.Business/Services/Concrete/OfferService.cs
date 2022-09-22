@@ -117,8 +117,7 @@ namespace ProductCatalog.Business.Services.Concrete
             offer.IsSold = true;
             _offerRepository.Update(offer);
 
-            var theProduct = products.SingleOrDefault(p => p.Product.Id == offer.ProductId);                      
-            var addedProduct = _mapper.Map<Product>(theProduct);
+            var addedProduct = _productRepository.GetById(offer.ProductId);
             addedProduct.IsOfferable = false;
             addedProduct.IsSold = true;
 
