@@ -10,6 +10,7 @@ namespace ProductCatalog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OffersController : ControllerBase
     {
         IOfferService _offerService;

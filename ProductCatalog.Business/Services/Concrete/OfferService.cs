@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ProductCatalog.Business.BusinessAspects.Autofac.JWT;
 using ProductCatalog.Business.Constants;
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Business.ValidationRules.CustomValidation.OfferRules;
@@ -76,13 +77,14 @@ namespace ProductCatalog.Business.Services.Concrete
             return new SuccessResult(Messages.OfferAccepted);
 
         }
-
+        //[SecuredOperation("product.update,admin")]
         [ValidationAspect(typeof(UpdateOfferDtoValidator))]
         public IResult Update(UpdateOfferDto entity, string userId, int offerId)
         {
             var offer = _offerRepository.GetById(offerId);
 
-            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId), _productRules.CheckIfProductInvalid(entity.ProductId), 
+            IResult result = BusinessRules.Run(_offerRules.CheckIfOfferInvalid(offerId), 
+                _productRules.CheckIfProductInvalid(entity.ProductId), 
                 _offerRules.CheckOfferOwner(offer,userId));
 
             if (result != null)
