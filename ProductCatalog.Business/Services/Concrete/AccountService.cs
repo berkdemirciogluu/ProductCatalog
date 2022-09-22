@@ -2,13 +2,7 @@
 using ProductCatalog.Business.Services.Abstract;
 using ProductCatalog.Core.Utilities.Results;
 using ProductCatalog.DataAccess.NHibernate.Repositories.Abstract;
-using ProductCatalog.DataAccess.UnitOfWorks;
 using ProductCatalog.Entities.DTOs.Offer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.Business.Services.Concrete
 {
