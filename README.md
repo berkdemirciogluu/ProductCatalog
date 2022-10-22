@@ -1,6 +1,6 @@
 # ProductCatalog API
 ## Introduction
-ProductCatalog API is a .NET Core Web API project that enables users to add their products and make them available to other users. This project is written using Postgresql with Hibernate, an ORM tool. In this project, PostgreSQL was the database and Hibernate was the ORM tool. The N-Tier Design Pattern was also taken into consideration when writing it. Moreover, validations and role based autorizations are handled with the power of AOP by using [Autofac](https://autofac.org/).
+ProductCatalog API is a .NET Core Web API project that enables users to add their products and make them available to other users. This project is written using Postgresql with Hibernate, an ORM tool. In this project, PostgreSQL was the database and Hibernate was the ORM tool. The N-Tier architecture was also taken into consideration while writing it. Moreover, validations and role based autorizations are handled with the power of AOP by using [Autofac](https://autofac.org/).
 ## How to Compile
 This section will walk you through each step of the installation process required to use API. 
 - [PostgreSQL 14](https://www.postgresql.org/download/) and [pgAdmin4](https://www.pgadmin.org/download/) must be installed on your computer. If you click on them, you will be directed to the relevant download pages.
